@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsProto;
+using Sources.EcsBoundedContexts.Core;
+using Sources.BoundedContexts.Systems;
 using Sources.EcsBoundedContexts.GameOvers.Infrastructure.Controllers;
 using Sources.EcsBoundedContexts.Timers.Infrastructure;
 using Sources.EcsBoundedContexts.GameObjects.Controllers;
@@ -13,16 +15,18 @@ namespace Sources.EcsBoundedContexts.Core
 
 		public GameSystemsCollector(
 			ProtoSystems protoSystems,
+			GameInitializeSystem gameInitializeSystem, //Order: 5 //Common
 			GameOverSystem gameOverSystem, //Order: 68 //Common
-			TimerSystem timerSystem, //Order: 79 //Ability
+			TimerSystem timerSystem, //Order: 79 //Common
 			ActiveGameObjectSystem activeGameObjectSystem //Order: 84 //Common
 		)
 		{
 			_protoSystems = protoSystems;
 			_systems = new IProtoSystem[]
 			{
+				gameInitializeSystem, //Common
 				gameOverSystem, //Common
-				timerSystem, //Ability
+				timerSystem, //Common
 				activeGameObjectSystem, //Common
 			};
 		}

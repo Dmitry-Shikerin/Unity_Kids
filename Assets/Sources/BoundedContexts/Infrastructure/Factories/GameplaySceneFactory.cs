@@ -1,22 +1,19 @@
-﻿using Sources.BoundedContexts.RootGameObjects.Presentation;
-using Sources.EcsBoundedContexts.Common.Extansions.Colliders;
+﻿using Cysharp.Threading.Tasks;
+using Sources.BoundedContexts.Controllers;
 using Sources.EcsBoundedContexts.Core;
-using Sources.Frameworks.DeepFramework.DeepSound.Runtime.Domain.Enums;
-using Sources.Frameworks.GameServices.Curtains.Presentation.Interfaces;
 using Sources.Frameworks.GameServices.DeepWrappers.Localizations;
 using Sources.Frameworks.GameServices.DeepWrappers.Sounds;
-using Sources.Frameworks.GameServices.Prefabs.Domain;
 using Sources.Frameworks.GameServices.Prefabs.Interfaces;
 using Sources.Frameworks.GameServices.Prefabs.Interfaces.Composites;
 using Sources.Frameworks.GameServices.Scenes.Controllers.Interfaces;
+using Sources.Frameworks.GameServices.Scenes.Infrastructure.Factories.Controllers.Interfaces;
 using Sources.Frameworks.GameServices.UpdateServices.Interfaces;
 using Sources.Frameworks.MyLeoEcsProto.Repositories;
-using UnityEngine;
 using Zenject;
 
-namespace Sources.BoundedContexts.Scenes.Controllers
+namespace Sources.BoundedContexts.Infrastructure.Factories
 {
-    public class GameplayScene : IScene
+    public class GameplaySceneFactory : ISceneFactory
     {
         private readonly IAssetCollector _assetCollector;
         private readonly IEntityRepository _entityRepository;
@@ -27,7 +24,7 @@ namespace Sources.BoundedContexts.Scenes.Controllers
         private readonly ILocalizationService _localizationService;
         private readonly IUpdateService _updateService;
 
-        public GameplayScene(
+        public GameplaySceneFactory(
             IAssetCollector assetCollector,
             IEntityRepository entityRepository,
             DiContainer container,
@@ -47,36 +44,19 @@ namespace Sources.BoundedContexts.Scenes.Controllers
             _updateService = updateService;
         }
 
-        public async void Enter(object payload = null)
+        public UniTask<IScene> Create(object payload)
         {
-            await _compositeAssetService.LoadAsync(ResourcesPrefabPath.ResourcesAssetsConfig, AddressablesPrefabPath.AddressablesAssetConfig);
-            ColliderExt.Construct(_entityRepository);
-            _localizationService.Translate();
-            _ecsGameStartUp.Initialize();
-            //_soundService.Initialize();
-            //_soundService.Play(SoundDatabaseName.Music, SoundName.GameplayBackgroundMusic);
-        }
+            IScene gameplayScene = new GameplayScene(
+                _assetCollector,
+                _entityRepository,
+                _container,
+                _compositeAssetService,
+                _soundService,
+                _ecsGameStartUp,
+                _localizationService,
+                _updateService);
 
-        public void Exit()
-        {
-            //_soundService.Stop(SoundName.GameplayBackgroundMusic);
-            //_soundService.Destroy();
-            _ecsGameStartUp.Destroy();
-            _compositeAssetService.Release();
-        }
-
-        public void Update(float deltaTime)
-        {
-            _updateService.Update(deltaTime);
-            _ecsGameStartUp.Update(deltaTime);
-        }
-
-        public void UpdateLate(float deltaTime)
-        {
-        }
-
-        public void UpdateFixed(float fixedDeltaTime)
-        {
+            return UniTask.FromResult(gameplayScene);
         }
     }
 }

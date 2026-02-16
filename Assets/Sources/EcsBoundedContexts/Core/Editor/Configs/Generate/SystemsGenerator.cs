@@ -59,7 +59,7 @@ namespace Sources.EcsBoundedContexts.Core.Editor.Configs.Generate
 
                     string name = type.Name;
 
-                    builder.Append($"\t\t\tcontainer.Bind<{name}>();\n");
+                    builder.Append($"\t\t\tcontainer.Bind<{name}>().AsSingle();\n");
                 }
 
                 builder.AppendLine();
@@ -79,7 +79,9 @@ namespace Sources.EcsBoundedContexts.Core.Editor.Configs.Generate
         {
             List<Type> types = GetSystemsTypes(aspect);
             List<string> namespaces = new List<string>();
+            Debug.Log($"{EcsGenerator.Instance.AspectPath}");
             string path = EcsGenerator.Instance.AspectPath;
+            Debug.Log($"{EcsGenerator.Instance.AspectPath}");
             string fileName = aspect.ToString() + "SystemsCollector";
             string fullPath = $"{Application.dataPath}/{path}/{fileName}.cs";
             StringBuilder builder = new StringBuilder();
@@ -189,6 +191,7 @@ namespace Sources.EcsBoundedContexts.Core.Editor.Configs.Generate
 
             string fullCode = builder.ToString();
 
+            Debug.Log($"{fullPath}");
             File.WriteAllText(fullPath, fullCode);
             builder.Clear();
         }

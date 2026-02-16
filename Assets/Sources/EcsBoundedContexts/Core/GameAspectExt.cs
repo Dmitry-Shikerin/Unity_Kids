@@ -1,14 +1,21 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 using Leopotam.EcsProto;
+using Leopotam.EcsProto.QoL;
 using Sources.Frameworks.MyLeoEcsProto.EventBuffers.Implementation;
 using Sources.Frameworks.GameServices.EntityPools.Domain.Components;
+using System;
 using Sources.EcsBoundedContexts.Timers.Domain;
 using Sources.EcsBoundedContexts.SaveLoads.Domain;
 using Sources.EcsBoundedContexts.GameObjects.Domain;
+using UnityEngine;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
 using Leopotam.EcsProto.Unity.Plugins.LeoEcsProtoCs.Leopotam.EcsProto.Unity.Runtime;
+using Leopotam.EcsProto;
 using Sources.EcsBoundedContexts.Animators;
+using Sources.BoundedContexts.Components;
+using Sources.BoundedContexts.Domain;
 
 namespace Sources.EcsBoundedContexts.Core
 {
@@ -129,7 +136,7 @@ namespace Sources.EcsBoundedContexts.Core
 
 		public static void DelSaveDataEvent(this ProtoEntity entity)
 			=> s_GameAspect.SaveDataEvent.Del(entity);
-		
+
 		//Active
 		public static bool HasActive(this ProtoEntity entity) =>
 			s_GameAspect.Active.Has(entity);
@@ -358,7 +365,6 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void DelScale(this ProtoEntity entity)
 			=> s_GameAspect.Scale.Del(entity);
 
-
 		//StringId
 		public static bool HasStringId(this ProtoEntity entity) =>
 			s_GameAspect.StringId.Has(entity);
@@ -427,5 +433,42 @@ namespace Sources.EcsBoundedContexts.Core
 
 		public static void DelAnimator(this ProtoEntity entity)
 			=> s_GameAspect.Animator.Del(entity);
+
+		//RectangleColor
+		public static bool HasRectangleColor(this ProtoEntity entity) =>
+			s_GameAspect.RectangleColor.Has(entity);
+
+		public static ref RectangleColorComponent GetRectangleColor(this ProtoEntity entity) =>
+			ref s_GameAspect.RectangleColor.Get(entity);
+
+		public static void ReplaceRectangleColor(this ProtoEntity entity, RectangleColors color)
+		{
+			ref RectangleColorComponent rectangleColorComponent = ref s_GameAspect.RectangleColor.Get(entity);
+			rectangleColorComponent.Color = color;
+		}
+
+		public static ref RectangleColorComponent AddRectangleColor(this ProtoEntity entity, RectangleColors color)
+		{
+			ref RectangleColorComponent rectangleColorComponent = ref s_GameAspect.RectangleColor.Add(entity);
+			rectangleColorComponent.Color = color;
+			return ref rectangleColorComponent;
+		}
+
+		public static void DelRectangleColor(this ProtoEntity entity)
+			=> s_GameAspect.RectangleColor.Del(entity);
+
+		//Rectangle
+		public static bool HasRectangle(this ProtoEntity entity) =>
+			s_GameAspect.Rectangle.Has(entity);
+
+		public static ref RectangleTag AddRectangle(this ProtoEntity entity)
+		{
+			ref RectangleTag rectangleTag = ref s_GameAspect.Rectangle.Add(entity);
+			return ref rectangleTag;
+		}
+
+		public static void DelRectangle(this ProtoEntity entity)
+			=> s_GameAspect.Rectangle.Del(entity);
+
 	}
 }

@@ -9,6 +9,7 @@ using Sources.EcsBoundedContexts.SaveLoads.Domain;
 using Sources.EcsBoundedContexts.GameObjects.Domain;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
 using Sources.EcsBoundedContexts.Animators;
+using Sources.BoundedContexts.Components;
 
 namespace Sources.EcsBoundedContexts.Core
 {
@@ -29,6 +30,7 @@ namespace Sources.EcsBoundedContexts.Core
 		public readonly ProtoPool<DisableGameObjectEvent> DisableGameObjectEvent = new ();
 		public readonly ProtoPool<EnableGameObjectEvent> EnableGameObjectEvent = new ();
 		public readonly ProtoPool<GameObjectComponent> GameObject = new ();
+		public readonly ProtoPool<AvailableComponent> Available = new ();
 		public readonly ProtoPool<CompleteComponent> Complete = new ();
 		public readonly ProtoPool<DecreaseEvent> DecreaseEvent = new ();
 		public readonly ProtoPool<DistanceComponent> Distance = new ();
@@ -44,10 +46,10 @@ namespace Sources.EcsBoundedContexts.Core
 
 		//EventBuffer
 		public readonly ProtoPool<EventBufferTag> EventBuffer = new ();
-		
-		public readonly ProtoPool<AvailableComponent> Available = new ();
 
-		//Tutorial
+		//Rectangle
+		public readonly ProtoPool<RectangleColorComponent> RectangleColor = new ();
+		public readonly ProtoPool<RectangleTag> Rectangle = new ();
 
 		public GameAspect()
 		{
@@ -77,6 +79,8 @@ namespace Sources.EcsBoundedContexts.Core
 				[typeof(ProtoPool<StringIdComponent>)] = StringId,
 				[typeof(ProtoPool<TransformComponent>)] = Transform,
 				[typeof(ProtoPool<AnimatorComponent>)] = Animator,
+				[typeof(ProtoPool<RectangleColorComponent>)] = RectangleColor,
+				[typeof(ProtoPool<RectangleTag>)] = Rectangle,
 			};
 
 			GameAspectExt.Construct(this);

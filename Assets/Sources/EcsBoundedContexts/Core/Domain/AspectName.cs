@@ -5,6 +5,5 @@
     {
         Default = 0,
         Game = 1,
-        MainMenu = 2,
     }
 }

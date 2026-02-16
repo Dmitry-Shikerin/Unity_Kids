@@ -1,4 +1,5 @@
 ﻿using Leopotam.EcsProto;
+using Sources.BoundedContexts.Infrastructure.Factories;
 using Sources.EcsBoundedContexts.Core;
 using Sources.Frameworks.GameServices.EntityPools.Implementation;
 using Sources.Frameworks.GameServices.EntityPools.Interfaces;
@@ -7,7 +8,6 @@ using Sources.Frameworks.MyLeoEcsProto.EventBuffers.Interfaces;
 using Sources.Frameworks.MyLeoEcsProto.Features;
 using Sources.Frameworks.MyLeoEcsProto.Repositories;
 using Sources.Frameworks.MyLeoEcsProto.Repositories.Impl;
-using UnityEngine;
 using Zenject;
 
 namespace Sources.App.DIContainers.Common
@@ -29,6 +29,8 @@ namespace Sources.App.DIContainers.Common
             
             //Pools
             Container.Bind<IEntityPoolManager>().To<EntityPoolManager>().AsSingle();
+            
+            Container.Bind<RectangleEntityFactory>().AsSingle();
         }
     }
 }

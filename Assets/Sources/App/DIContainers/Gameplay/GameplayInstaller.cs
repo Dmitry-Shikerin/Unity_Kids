@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.BoundedContexts.RootGameObjects.Presentation;
-using Sources.BoundedContexts.Scenes.Infrastructure.Factories;
+using Sources.BoundedContexts.Infrastructure.Factories;
+using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core;
 using Sources.Frameworks.GameServices.Prefabs.Implementation.Composites;
 using Sources.Frameworks.GameServices.Prefabs.Interfaces.Composites;
@@ -12,11 +12,11 @@ namespace Sources.App.DIContainers.Gameplay
 {
     public class GameplayInstaller : MonoInstaller
     {
-        // [Required] [SerializeField] private RootGameObject _rootGameObject;
+        [Required] [SerializeField] private HudView _hud;
         
         public override void InstallBindings()
         {
-            // Container.Bind().FromInstance(_rootGameObject).AsSingle();
+            Container.Bind<HudView>().FromInstance(_hud).AsSingle();
             
             Container.Bind<ISceneFactory>().To<GameplaySceneFactory>().AsSingle();
             Container.Bind<ICompositeAssetService>().To<GameplayAssetService>().AsSingle();

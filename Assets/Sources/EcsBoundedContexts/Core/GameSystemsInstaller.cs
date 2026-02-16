@@ -1,3 +1,4 @@
+using Sources.BoundedContexts.Systems;
 using Sources.EcsBoundedContexts.GameOvers.Infrastructure.Controllers;
 using Sources.EcsBoundedContexts.Timers.Infrastructure;
 using Sources.EcsBoundedContexts.GameObjects.Controllers;
@@ -12,10 +13,15 @@ namespace Sources.EcsBoundedContexts.Core
 			//Default
 
 			//Common
+			container.Bind<GameInitializeSystem>().AsSingle();
 			container.Bind<GameOverSystem>().AsSingle();
+			container.Bind<TimerSystem>().AsSingle();
 			container.Bind<ActiveGameObjectSystem>().AsSingle();
 
-			container.Bind<TimerSystem>().AsSingle();
+			//EventBuffer
+
+			//Rectangle
+
 		}
 	}
 }

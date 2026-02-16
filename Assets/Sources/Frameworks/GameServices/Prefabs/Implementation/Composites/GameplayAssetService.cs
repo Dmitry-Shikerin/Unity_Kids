@@ -47,7 +47,7 @@ namespace Sources.Frameworks.GameServices.Prefabs.Implementation.Composites
         {
             AddressablesAssetConfig config = await _addressablesAssetLoader.LoadAsset<AddressablesAssetConfig>(addressablesCollectorPath);
             
-            //await AddressalesLoad(config.UiConfig);
+            await AddressalesLoad(config.RectangleConfig);
             
             //Prefabs
             //await AddressalesPrefabLoad<CharacterMeleeModule>(config.CharacterMeleeModule);
