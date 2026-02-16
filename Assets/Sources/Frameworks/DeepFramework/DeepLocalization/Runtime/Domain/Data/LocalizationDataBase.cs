@@ -13,6 +13,7 @@ using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.DeepFramework.DeepLocalization.Runtime.Domain.Data
 {
+    [CreateAssetMenu(fileName = LocalizationConst.LocalizationDatabaseAsset, menuName = "DeepFramework/Localization/LocalizationDataBase", order = 51)]
     public class LocalizationDataBase : ScriptableObject
     {
         private const string GetIdTabGroup = "GetId";
@@ -49,8 +50,8 @@ namespace Sources.Frameworks.DeepFramework.DeepLocalization.Runtime.Domain.Data
             }
         }
         
-        [DisplayAsString(false)] [HideLabel] [SerializeField]
-        private string _headere = LocalizationConst.UiLocalizationDataBaseLabel;
+        [DisplayAsString(false)] 
+        [HideLabel] [SerializeField] private string _headere = LocalizationConst.UiLocalizationDataBaseLabel;
 
         //Data
         [TabGroup(GetIdTabGroup, DatabaseTab)] 

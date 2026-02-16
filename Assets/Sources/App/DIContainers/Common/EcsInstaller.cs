@@ -7,6 +7,7 @@ using Sources.Frameworks.MyLeoEcsProto.EventBuffers.Interfaces;
 using Sources.Frameworks.MyLeoEcsProto.Features;
 using Sources.Frameworks.MyLeoEcsProto.Repositories;
 using Sources.Frameworks.MyLeoEcsProto.Repositories.Impl;
+using UnityEngine;
 using Zenject;
 
 namespace Sources.App.DIContainers.Common
@@ -19,9 +20,9 @@ namespace Sources.App.DIContainers.Common
             GameAspect aspect = new GameAspect();
             ProtoWorld world = new ProtoWorld(aspect);
             ProtoSystems systems = new ProtoSystems(world);
-            Container.Bind().FromInstance(world).AsSingle();
-            Container.Bind().FromInstance(aspect).AsSingle();
-            Container.Bind().FromInstance(systems).AsSingle();
+            Container.Bind<ProtoWorld>().FromInstance(world).AsSingle();
+            Container.Bind<GameAspect>().FromInstance(aspect).AsSingle();
+            Container.Bind<ProtoSystems>().FromInstance(systems).AsSingle();
             Container.Bind<IEventBuffer>().To<EventBuffer>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
             Container.Bind<IFeatureService>().To<FeatureService>().AsSingle();

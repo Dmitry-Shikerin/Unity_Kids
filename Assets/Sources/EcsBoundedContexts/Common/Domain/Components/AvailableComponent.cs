@@ -7,7 +7,7 @@ namespace Sources.EcsBoundedContexts.Common.Domain.Components
 {
     [Serializable] 
     [ProtoUnityAuthoring]
-    [Component(group: ComponentGroup.Ability)]
+    [Component(group: ComponentGroup.Common)]
     [Aspect(AspectName.Game)]
     public struct AvailableComponent
     {

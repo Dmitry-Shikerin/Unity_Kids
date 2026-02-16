@@ -40,8 +40,8 @@ namespace Sources.EcsBoundedContexts.GameOvers.Infrastructure.Controllers
 
         public void Init(IProtoSystems systems)
         {
-            _killEnemyCounter = _entityRepository.GetByName(IdsConst.KillEnemyCounter);
-            _bunker = _entityRepository.GetByName(IdsConst.Bunker);
+            // _killEnemyCounter = _entityRepository.GetByName(IdsConst.KillEnemyCounter);
+            // _bunker = _entityRepository.GetByName(IdsConst.Bunker);
         }
 
         private void OnDeath()

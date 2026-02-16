@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Sources.EcsBoundedContexts.Timers.Infrastructure
 {
     [EcsSystem(79)]
-    [ComponentGroup(ComponentGroup.Ability)]
+    [ComponentGroup(ComponentGroup.Common)]
     [Aspect(AspectName.Game)]
     public class TimerSystem : IProtoRunSystem
     {

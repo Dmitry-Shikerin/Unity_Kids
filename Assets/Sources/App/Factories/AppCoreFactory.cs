@@ -24,24 +24,22 @@ namespace Sources.App.Factories
             AppCore appCore = new GameObject(nameof(AppCore)).AddComponent<AppCore>();
 
             ProjectContext projectContext = Object.FindObjectOfType<ProjectContext>();
-            CurtainView curtainView =
-                Object.Instantiate(Resources.Load<CurtainView>(ResourcesPrefabPath.Curtain)) ??
-                throw new NullReferenceException(nameof(CurtainView));
-            projectContext.Container.Bind<ICurtainView>().FromInstance(curtainView).AsSingle();
+            // CurtainView curtainView =
+            //     Object.Instantiate(Resources.Load<CurtainView>(ResourcesPrefabPath.Curtain)) ??
+            //     throw new NullReferenceException(nameof(CurtainView));
+            //projectContext.Container.Bind<ICurtainView>().FromInstance(curtainView).AsSingle();
             ISceneLoaderService sceneLoaderService = projectContext.Container.Resolve<ISceneLoaderService>();
-            curtainView.Hide();
+            //curtainView.Hide();
             
             Dictionary<string, Func<object, SceneContext, UniTask<IScene>>> sceneFactories =
                 new Dictionary<string, Func<object, SceneContext, UniTask<IScene>>>();
             SceneService sceneService = new SceneService(sceneFactories);
             projectContext.Container.Bind<ISceneService>().FromInstance(sceneService).AsSingle();
-
-            sceneFactories[IdsConst.MainMenu] = (payload, sceneContext) =>
-                sceneContext.Container.Resolve<ISceneFactory>().Create(payload);
+            
             sceneFactories[IdsConst.Gameplay] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<ISceneFactory>().Create(payload);            
 
-            sceneService.AddBeforeSceneChangeHandler(async _ => await curtainView.ShowAsync());
+            //sceneService.AddBeforeSceneChangeHandler(async _ => await curtainView.ShowAsync());
             sceneService.AddBeforeSceneChangeHandler(async sceneName => await sceneLoaderService.Load(sceneName));
 
             appCore.Construct(sceneService);

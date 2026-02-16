@@ -37,10 +37,10 @@ namespace Sources.Frameworks.GameServices.Prefabs.Implementation.Composites
 
         protected override async UniTask LoadByResourcesFoldersAsync()
         {
-            await UniTask.WhenAll
-            (
-                _resourcesAssetLoader.LoadAsset<PoolManagerCollector>(ResourcesPrefabPath.PoolManagerCollector)
-            );
+            // await UniTask.WhenAll
+            // (
+            //     _resourcesAssetLoader.LoadAsset<PoolManagerCollector>(ResourcesPrefabPath.PoolManagerCollector)
+            // );
         }
         
         protected override async UniTask LoadByAddressableConfigAsync(string addressablesCollectorPath)

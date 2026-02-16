@@ -12,11 +12,11 @@ namespace Sources.App.DIContainers.Gameplay
 {
     public class GameplayInstaller : MonoInstaller
     {
-        [Required] [SerializeField] private RootGameObject _rootGameObject;
+        // [Required] [SerializeField] private RootGameObject _rootGameObject;
         
         public override void InstallBindings()
         {
-            Container.Bind().FromInstance(_rootGameObject).AsSingle();
+            // Container.Bind().FromInstance(_rootGameObject).AsSingle();
             
             Container.Bind<ISceneFactory>().To<GameplaySceneFactory>().AsSingle();
             Container.Bind<ICompositeAssetService>().To<GameplayAssetService>().AsSingle();

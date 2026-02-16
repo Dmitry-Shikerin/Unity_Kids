@@ -12,10 +12,10 @@ namespace Sources.EcsBoundedContexts.Core
 			//Default
 
 			//Common
-			container.Bind<GameOverSystem>();
-			container.Bind<ActiveGameObjectSystem>();
+			container.Bind<GameOverSystem>().AsSingle();
+			container.Bind<ActiveGameObjectSystem>().AsSingle();
 
-			container.Bind<TimerSystem>();
+			container.Bind<TimerSystem>().AsSingle();
 		}
 	}
 }
