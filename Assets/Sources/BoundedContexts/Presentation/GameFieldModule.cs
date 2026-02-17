@@ -21,7 +21,7 @@ namespace Sources.BoundedContexts.Presentation
             
             RectangleModule module =
                 (RectangleModule)eventData.pointerDrag.GetComponent<RectangleModule>();
-
+            
             if (module._isOnGameBoard)
                 _gameBoard.Remove(module);
             

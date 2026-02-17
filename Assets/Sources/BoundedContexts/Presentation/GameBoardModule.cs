@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Leopotam.EcsProto.Unity.Plugins.LeoEcsProtoCs.Leopotam.EcsProto.Unity.Runtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -81,7 +82,21 @@ namespace Sources.BoundedContexts.Presentation
                 else
                 {
                     //Debug.Log($"Не попал уничтожаем");
-                    Destroy(module.gameObject);
+                    // Создаем последовательность анимаций
+                    Sequence sequence = DOTween.Sequence();
+        
+                    // Добавляем вращение вокруг оси Z (для UI обычно используется Z)
+                    sequence.Join(module.transform.DORotate(new Vector3(0, 0, 360), 1f, RotateMode.FastBeyond360)
+                        .SetEase(Ease.Linear));
+        
+                    // Добавляем исчезание (прозрачность)
+                    sequence.Join(module._canvasGroup.DOFade(0f, 1f)
+                        .SetEase(Ease.InOutQuad));
+        
+                    sequence.onComplete = () => Destroy(module.gameObject);
+                    // Запускаем
+                    sequence.Play();
+                    
                     return;
                 }
             }
