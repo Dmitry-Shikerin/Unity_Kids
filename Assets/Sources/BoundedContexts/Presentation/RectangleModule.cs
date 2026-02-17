@@ -1,3 +1,4 @@
+using System;
 using Leopotam.EcsProto.Unity.Plugins.LeoEcsProtoCs.Leopotam.EcsProto.Unity.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,6 +14,11 @@ namespace Sources.BoundedContexts.Presentation
         [Required] [SerializeField] private RectTransform _rectTransform;
         [Required] [SerializeField] private Canvas _mainCanvas;
         [Required] [SerializeField] private CanvasGroup _canvasGroup;
+        [field: SerializeField] public RectTransform TopTransform { get; private set; }
+        [field: SerializeField] public RectTransform LeftTransform { get; private set; }
+        [field: SerializeField] public RectTransform RightTransform { get; private set; }
+
+        private bool _isOnGameBoard;
         
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -37,9 +43,21 @@ namespace Sources.BoundedContexts.Presentation
 
         public void MoveDown(Vector3 pos)
         {
+            if (_isOnGameBoard)
+            {
+                Debug.Log($"Если не попал в дыру то уничтожить");
+                Destroy(gameObject);
+            }
+            
             SlotModule.FillSlot();
-            transform.localPosition = pos;
+            transform.position = pos;
+            _isOnGameBoard = true;
             Debug.Log($"Заполнить слот");
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawRay(transform.position, Vector3.down);
         }
     }
 }
