@@ -3,6 +3,7 @@ using Leopotam.EcsProto.Unity.Plugins.LeoEcsProtoCs.Leopotam.EcsProto.Unity.Runt
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Sources.BoundedContexts.Presentation
@@ -18,12 +19,26 @@ namespace Sources.BoundedContexts.Presentation
         [field: SerializeField] public RectTransform LeftTransform { get; private set; }
         [field: SerializeField] public RectTransform RightTransform { get; private set; }
 
-        private bool _isOnGameBoard;
+        public bool _isOnGameBoard;
+        private GameBoardModule _gameboardModule;
+        [FormerlySerializedAs("_isFirst")] public bool IsFirst;
+        public bool _isLust;
+
+        public void SetGameBoard(GameBoardModule gameBoardModule)
+        {
+            _gameboardModule = gameBoardModule;
+        }
         
         public void OnBeginDrag(PointerEventData eventData)
         {
             //Transform slotTransform = _rectTransform.parent;
             //slotTransform.SetAsLastSibling();
+
+            if (_isOnGameBoard)
+            {
+                FindObjectOfType<GameFieldModule>(true).gameObject.SetActive(true);
+            }
+            
             _rectTransform.SetParent(_mainCanvas.transform);
             _rectTransform.SetAsLastSibling();
             
@@ -43,16 +58,18 @@ namespace Sources.BoundedContexts.Presentation
 
         public void MoveDown(Vector3 pos)
         {
-            if (_isOnGameBoard)
-            {
-                Debug.Log($"Если не попал в дыру то уничтожить");
-                Destroy(gameObject);
-            }
+            // if (_isOnGameBoard)
+            // {
+            //     Debug.Log($"Если не попал в дыру то уничтожить");
+            //     _gameboardModule.Remove(this);
+            //     Destroy(gameObject);
+            //     return;
+            // }
             
             SlotModule.FillSlot();
             transform.position = pos;
             _isOnGameBoard = true;
-            Debug.Log($"Заполнить слот");
+            //Debug.Log($"Заполнить слот");
         }
 
         private void OnDrawGizmos()

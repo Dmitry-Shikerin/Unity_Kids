@@ -9,7 +9,7 @@ namespace Sources.BoundedContexts.Presentation
 
         public void FillSlot()
         {
-            Debug.Log($"Заполнить слот");
+            //Debug.Log($"Заполнить слот");
         }
     }
 }
