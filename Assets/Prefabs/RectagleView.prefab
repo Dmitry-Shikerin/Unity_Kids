@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 563567253347513958}
   - component: {fileID: -1661327487910631155}
   - component: {fileID: -6747989685576151433}
+  - component: {fileID: 7726916447216460528}
   m_Layer: 5
   m_Name: RectagleView
   m_TagString: Untagged
@@ -36,11 +37,11 @@ RectTransform:
   - {fileID: 3862347388428080709}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 136.2, y: 3.9}
-  m_SizeDelta: {x: 178.25, y: 178.25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5734792, y: 0.5}
+  m_AnchorMax: {x: 0.5734792, y: 0.5}
+  m_AnchoredPosition: {x: -5.300049, y: -85.224976}
+  m_SizeDelta: {x: 179.25, y: 178.25}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8562744526176763215
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -77,6 +78,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Background>k__BackingField: {fileID: 1562852347756575545}
+  <SlotModule>k__BackingField: {fileID: 0}
+  _rectTransform: {fileID: 0}
+  _mainCanvas: {fileID: 0}
+  _canvasGroup: {fileID: 0}
 --- !u!114 &-6747989685576151433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +102,18 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!225 &7726916447216460528
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5779736639049549295}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5823961771128516911
 GameObject:
   m_ObjectHideFlags: 0

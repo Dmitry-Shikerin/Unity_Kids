@@ -32,14 +32,14 @@ namespace Sources.BoundedContexts.Systems
 
         public void Init(IProtoSystems systems)
         {
-            RectangleConfig config = _assetCollector.Get<RectangleConfig>();
-            EntityLink prefab = config.View;
-
-            foreach (KeyValuePair<RectangleColors, Sprite> sprite in config.Sprites)
-            {
-                EntityLink instance = Object.Instantiate(prefab, _hudView.RectanglesParent, false);
-                _factory.Create(instance, sprite.Key, sprite.Value);
-            }
+            // RectangleConfig config = _assetCollector.Get<RectangleConfig>();
+            // EntityLink prefab = config.View;
+            //
+            // foreach (KeyValuePair<RectangleColors, Sprite> sprite in config.Sprites)
+            // {
+            //     EntityLink instance = Object.Instantiate(prefab, _hudView.RectanglesParent, false);
+            //     _factory.Create(instance, sprite.Key, sprite.Value);
+            // }
         }
     }
 }
