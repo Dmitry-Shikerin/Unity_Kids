@@ -1,8 +1,8 @@
 using System;
 using Leopotam.EcsProto.Unity;
+using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
-using UnityEngine.EventSystems;
 
 namespace Sources.BoundedContexts.Components.Events
 {
@@ -12,6 +12,6 @@ namespace Sources.BoundedContexts.Components.Events
     [Aspect(AspectName.Game)]
     public struct OnDropEvent
     {
-        public PointerEventData Value;
+        public RectangleModule Value;
     }
 }

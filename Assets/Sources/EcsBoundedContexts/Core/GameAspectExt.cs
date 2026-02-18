@@ -21,7 +21,6 @@ using Sources.BoundedContexts.Components.Slots;
 using Sources.BoundedContexts.Components.Rectangles;
 using Sources.BoundedContexts.Components.GameBoards;
 using Sources.BoundedContexts.Components.Events;
-using UnityEngine.EventSystems;
 
 namespace Sources.EcsBoundedContexts.Core
 {
@@ -473,16 +472,16 @@ namespace Sources.EcsBoundedContexts.Core
 		public static ref RectangleColorComponent GetRectangleColor(this ProtoEntity entity) =>
 			ref s_GameAspect.RectangleColor.Get(entity);
 
-		public static void ReplaceRectangleColor(this ProtoEntity entity, RectangleColors color)
+		public static void ReplaceRectangleColor(this ProtoEntity entity, RectangleColors value)
 		{
 			ref RectangleColorComponent rectangleColorComponent = ref s_GameAspect.RectangleColor.Get(entity);
-			rectangleColorComponent.Value = color;
+			rectangleColorComponent.Value = value;
 		}
 
-		public static ref RectangleColorComponent AddRectangleColor(this ProtoEntity entity, RectangleColors color)
+		public static ref RectangleColorComponent AddRectangleColor(this ProtoEntity entity, RectangleColors value)
 		{
 			ref RectangleColorComponent rectangleColorComponent = ref s_GameAspect.RectangleColor.Add(entity);
-			rectangleColorComponent.Value = color;
+			rectangleColorComponent.Value = value;
 			return ref rectangleColorComponent;
 		}
 
@@ -679,6 +678,19 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void DelDestroyEvent(this ProtoEntity entity)
 			=> s_GameAspect.DestroyEvent.Del(entity);
 
+		//DropRectanglesEvent
+		public static bool HasDropRectanglesEvent(this ProtoEntity entity) =>
+			s_GameAspect.DropRectanglesEvent.Has(entity);
+
+		public static ref DropRectanglesEvent AddDropRectanglesEvent(this ProtoEntity entity)
+		{
+			ref DropRectanglesEvent dropRectanglesEvent = ref s_GameAspect.DropRectanglesEvent.Add(entity);
+			return ref dropRectanglesEvent;
+		}
+
+		public static void DelDropRectanglesEvent(this ProtoEntity entity)
+			=> s_GameAspect.DropRectanglesEvent.Del(entity);
+
 		//FillSlotEvent
 		public static bool HasFillSlotEvent(this ProtoEntity entity) =>
 			s_GameAspect.FillSlotEvent.Has(entity);
@@ -722,13 +734,13 @@ namespace Sources.EcsBoundedContexts.Core
 		public static ref OnBeginDragEvent GetOnBeginDragEvent(this ProtoEntity entity) =>
 			ref s_GameAspect.OnBeginDragEvent.Get(entity);
 
-		public static void ReplaceOnBeginDragEvent(this ProtoEntity entity, PointerEventData value)
+		public static void ReplaceOnBeginDragEvent(this ProtoEntity entity, GameObject value)
 		{
 			ref OnBeginDragEvent onBeginDragEvent = ref s_GameAspect.OnBeginDragEvent.Get(entity);
 			onBeginDragEvent.Value = value;
 		}
 
-		public static ref OnBeginDragEvent AddOnBeginDragEvent(this ProtoEntity entity, PointerEventData value)
+		public static ref OnBeginDragEvent AddOnBeginDragEvent(this ProtoEntity entity, GameObject value)
 		{
 			ref OnBeginDragEvent onBeginDragEvent = ref s_GameAspect.OnBeginDragEvent.Add(entity);
 			onBeginDragEvent.Value = value;
@@ -745,13 +757,13 @@ namespace Sources.EcsBoundedContexts.Core
 		public static ref OnDropEvent GetOnDropEvent(this ProtoEntity entity) =>
 			ref s_GameAspect.OnDropEvent.Get(entity);
 
-		public static void ReplaceOnDropEvent(this ProtoEntity entity, PointerEventData value)
+		public static void ReplaceOnDropEvent(this ProtoEntity entity, RectangleModule value)
 		{
 			ref OnDropEvent onDropEvent = ref s_GameAspect.OnDropEvent.Get(entity);
 			onDropEvent.Value = value;
 		}
 
-		public static ref OnDropEvent AddOnDropEvent(this ProtoEntity entity, PointerEventData value)
+		public static ref OnDropEvent AddOnDropEvent(this ProtoEntity entity, RectangleModule value)
 		{
 			ref OnDropEvent onDropEvent = ref s_GameAspect.OnDropEvent.Add(entity);
 			onDropEvent.Value = value;
@@ -768,13 +780,13 @@ namespace Sources.EcsBoundedContexts.Core
 		public static ref OnEndDragEvent GetOnEndDragEvent(this ProtoEntity entity) =>
 			ref s_GameAspect.OnEndDragEvent.Get(entity);
 
-		public static void ReplaceOnEndDragEvent(this ProtoEntity entity, PointerEventData value)
+		public static void ReplaceOnEndDragEvent(this ProtoEntity entity, GameObject value)
 		{
 			ref OnEndDragEvent onEndDragEvent = ref s_GameAspect.OnEndDragEvent.Get(entity);
 			onEndDragEvent.Value = value;
 		}
 
-		public static ref OnEndDragEvent AddOnEndDragEvent(this ProtoEntity entity, PointerEventData value)
+		public static ref OnEndDragEvent AddOnEndDragEvent(this ProtoEntity entity, GameObject value)
 		{
 			ref OnEndDragEvent onEndDragEvent = ref s_GameAspect.OnEndDragEvent.Add(entity);
 			onEndDragEvent.Value = value;

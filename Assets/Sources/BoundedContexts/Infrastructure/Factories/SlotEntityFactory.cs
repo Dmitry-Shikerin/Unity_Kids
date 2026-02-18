@@ -58,6 +58,7 @@ namespace Sources.BoundedContexts.Infrastructure.Factories
             Authoring(link, entity);
 
             entity.AddRectangleSlotModule(module);
+            entity.AddTransform(module.transform);
 
             return entity;
         }

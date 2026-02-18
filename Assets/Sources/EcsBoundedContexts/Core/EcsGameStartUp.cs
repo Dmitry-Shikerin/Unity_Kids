@@ -66,10 +66,12 @@ namespace Sources.EcsBoundedContexts.Core
             _systems.DelHere<DecreaseEvent>();
             _systems.DelHere<InitializeEvent>();
             _systems.DelHere<OnBeginDragEvent>();
+            _systems.DelHere<OnEndDragEvent>();
             _systems.DelHere<MoveToEvent>();
             _systems.DelHere<OnDropEvent>();
             _systems.DelHere<DestroyEvent>();
             _systems.DelHere<FillSlotEvent>();
+            _systems.DelHere<DropRectanglesEvent>();
         }
         
         private void Init()

@@ -9,11 +9,10 @@ using Sources.EcsBoundedContexts.Core;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-namespace Sources.BoundedContexts.Systems
+namespace Sources.BoundedContexts.Systems.GameBoards
 {
-    [EcsSystem(20)]
+    [EcsSystem(24)]
     [ComponentGroup(ComponentGroup.Common)]
     [Aspect(AspectName.Game)]
     public class GameBoardSystem : IProtoRunSystem
@@ -37,9 +36,12 @@ namespace Sources.BoundedContexts.Systems
 
         private void OnDrop(ProtoEntity entity)
         {
-            PointerEventData eventData = entity.GetOnDropEvent().Value;
             GameBoardModule gameBoardModule = entity.GetGameBoardModule().Value;
-            RectangleModule module = eventData.pointerDrag.GetComponent<RectangleModule>();
+            RectangleModule module = entity.GetOnDropEvent().Value;
+
+            if (module == null)
+                throw new ArgumentNullException(nameof(module));
+            
             ProtoEntity rectangleEntity = module.Entity;
             
             if (rectangleEntity.HasIsOnGameBoard())
@@ -49,27 +51,35 @@ namespace Sources.BoundedContexts.Systems
 
             if (_lastIt.Len() > 1)
                 throw new IndexOutOfRangeException("LastIt.Len() > 1");
-
-            ProtoEntity lastRectangleEntity = _lastIt.First().Entity;
-            RectangleModule lastRectangleModule = lastRectangleEntity.GetRectangleModule().Value;
-
+            
             if (CanPost(module))
             {
-                rectangleEntity.AddLast();
-                lastRectangleEntity.DelLast();
-                Vector3 targetPosition = GetTargetPosition(gameBoardModule, lastRectangleModule);
+                Vector3 targetPosition = GetTargetPosition(gameBoardModule, module);
                 rectangleEntity.AddMoveToEvent(targetPosition);
+                rectangleEntity.GetParentSlot().Value.AddFillSlotEvent();
+                
+                if (_lastIt.Len() > 0)
+                {
+                    ProtoEntity lastRectangleEntity = _lastIt.First().Entity;
+                    lastRectangleEntity.DelLast();
+                }
+                
                 return;
             }
 
             rectangleEntity.AddDestroyEvent();
+            rectangleEntity.GetParentSlot().Value.AddFillSlotEvent();
         }
 
-        private Vector3 GetTargetPosition(GameBoardModule gameBoardModule, RectangleModule lastRectangleModule)
+        private Vector3 GetTargetPosition(GameBoardModule gameBoardModule, RectangleModule module)
         {
+            float xPos = module.transform.position.x;
+            
+            Debug.Log($"Can laST {_lastIt.Len() > 0}");
+            
             return _lastIt.Len() == 0
-                ? gameBoardModule.BotTransform.position
-                : lastRectangleModule.TopTransform.position;
+                ? new Vector3(xPos, gameBoardModule.BotTransform.position.y)
+                : new Vector3(xPos, _lastIt.First().Entity.GetRectangleModule().Value.TopTransform.position.y);
         }
 
         private bool CanPost(RectangleModule module)

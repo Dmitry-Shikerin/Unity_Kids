@@ -11,7 +11,10 @@ namespace Sources.BoundedContexts.Presentation
         [field: SerializeField] public RectTransform BotTransform { get; private set; }
         
 
-        public void OnDrop(PointerEventData eventData) =>
-            Entity.AddOnDropEvent(eventData);
+        public void OnDrop(PointerEventData eventData)
+        {
+            RectangleModule module = eventData.pointerDrag.GetComponent<RectangleModule>();
+            Entity.AddOnDropEvent(module);
+        }
     }
 }

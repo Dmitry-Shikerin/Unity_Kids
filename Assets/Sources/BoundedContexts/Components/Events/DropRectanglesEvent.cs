@@ -1,10 +1,7 @@
 using System;
 using Leopotam.EcsProto.Unity;
-using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
-using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Sources.BoundedContexts.Components.Events
 {
@@ -12,8 +9,7 @@ namespace Sources.BoundedContexts.Components.Events
     [ProtoUnityAuthoring]
     [Component(group: ComponentGroup.Rectangle)]
     [Aspect(AspectName.Game)]
-    public struct OnBeginDragEvent
+    public struct DropRectanglesEvent
     {
-        public GameObject Value;
     }
 }

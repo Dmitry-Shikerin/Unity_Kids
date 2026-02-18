@@ -8,10 +8,11 @@ using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
+using UnityEngine;
 
 namespace Sources.BoundedContexts.Systems
 {
-    [EcsSystem(20)]
+    [EcsSystem(28)]
     [ComponentGroup(ComponentGroup.Common)]
     [Aspect(AspectName.Game)]
     public class SlotSystem : IProtoRunSystem
@@ -32,11 +33,12 @@ namespace Sources.BoundedContexts.Systems
         {
             foreach (ProtoEntity entity in _it)
             {
-                RectangleColors color = entity.GetRectangleColor().Value;
+                RectangleColors color = entity.GetRectangleSlotColor().Value;
                 ProtoEntity rectangleEntity = _factory.Create(color, entity);
                 RectangleSlotModule slotModule = entity.GetRectangleSlotModule().Value;
                 RectangleModule rectangleModule = rectangleEntity.GetRectangleModule().Value;
                 rectangleModule.transform.SetParent(slotModule.transform);
+                rectangleModule.transform.localPosition = Vector3.zero;
             }
         }
     }

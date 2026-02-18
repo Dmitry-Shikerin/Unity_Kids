@@ -41,7 +41,11 @@ namespace Sources.BoundedContexts.Infrastructure.Factories
             ProtoEntity entity = _pool.Get();
             RectangleConfig config = _assetCollector.Get<RectangleConfig>();
             entity.GetRectangleModule().Value.Background.sprite = config.Sprites[color];
-            entity.AddRectangleColor(color);
+
+            if (entity.HasRectangleColor())
+                entity.ReplaceRectangleColor(color);
+            else
+                entity.AddRectangleColor(color);
 
             if (entity.HasParentSlot())
                 entity.ReplaceParentSlot(parentSlot);
@@ -60,6 +64,7 @@ namespace Sources.BoundedContexts.Infrastructure.Factories
             Aspect.Rectangle.NewEntity(out ProtoEntity entity);
             Authoring(link, entity);
             entity.AddRectangleModule(module);
+            entity.AddTransform(module.transform);
             
             return entity;
         }

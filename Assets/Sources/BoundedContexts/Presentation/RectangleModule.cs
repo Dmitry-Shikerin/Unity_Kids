@@ -25,12 +25,12 @@ namespace Sources.BoundedContexts.Presentation
             _hudView = hudView;
 
         public void OnBeginDrag(PointerEventData eventData) =>
-            Entity.AddOnBeginDragEvent(eventData);
+            Entity.AddOnBeginDragEvent(eventData.pointerEnter);
 
         public void OnDrag(PointerEventData eventData) =>
             RectTransform.anchoredPosition += eventData.delta / _hudView.MainCanvas.scaleFactor;
 
         public void OnEndDrag(PointerEventData eventData) =>
-            Entity.AddOnEndDragEvent(eventData);
+            Entity.AddOnEndDragEvent(eventData.pointerEnter);
     }
 }

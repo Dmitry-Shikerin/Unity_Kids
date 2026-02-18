@@ -65,6 +65,7 @@ namespace Sources.EcsBoundedContexts.Core
 		public readonly ProtoPool<GameBoardModuleComponent> GameBoardModule = new ();
 		public readonly ProtoPool<GameBoardTag> GameBoard = new ();
 		public readonly ProtoPool<DestroyEvent> DestroyEvent = new ();
+		public readonly ProtoPool<DropRectanglesEvent> DropRectanglesEvent = new ();
 		public readonly ProtoPool<FillSlotEvent> FillSlotEvent = new ();
 		public readonly ProtoPool<MoveToEvent> MoveToEvent = new ();
 		public readonly ProtoPool<OnBeginDragEvent> OnBeginDragEvent = new ();
@@ -112,6 +113,7 @@ namespace Sources.EcsBoundedContexts.Core
 				[typeof(ProtoPool<GameBoardModuleComponent>)] = GameBoardModule,
 				[typeof(ProtoPool<GameBoardTag>)] = GameBoard,
 				[typeof(ProtoPool<DestroyEvent>)] = DestroyEvent,
+				[typeof(ProtoPool<DropRectanglesEvent>)] = DropRectanglesEvent,
 				[typeof(ProtoPool<FillSlotEvent>)] = FillSlotEvent,
 				[typeof(ProtoPool<MoveToEvent>)] = MoveToEvent,
 				[typeof(ProtoPool<OnBeginDragEvent>)] = OnBeginDragEvent,
