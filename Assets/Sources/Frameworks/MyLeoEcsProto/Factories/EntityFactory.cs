@@ -28,8 +28,6 @@ namespace Sources.Frameworks.MyLeoEcsProto.Factories
 
         protected GameAspect Aspect { get; }
 
-        public abstract ProtoEntity Create(EntityLink link);
-
         protected void Authoring(EntityLink link, ProtoEntity entity)
         {
             if (link == null)

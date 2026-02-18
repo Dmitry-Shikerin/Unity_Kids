@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Leopotam.EcsProto;
 using Sources.Frameworks.GameServices.EntityPools.Domain.Configs;
 using Sources.Frameworks.GameServices.EntityPools.Interfaces;
-using Sources.Frameworks.MyLeoEcsProto.ObjectPools.Interfaces;
 using UnityEngine;
 
 namespace Sources.Frameworks.GameServices.EntityPools.Implementation

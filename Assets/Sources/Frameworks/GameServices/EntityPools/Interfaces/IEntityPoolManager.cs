@@ -1,5 +1,4 @@
 using Leopotam.EcsProto;
-using Sources.Frameworks.MyLeoEcsProto.ObjectPools.Interfaces;
 
 namespace Sources.Frameworks.GameServices.EntityPools.Interfaces
 {

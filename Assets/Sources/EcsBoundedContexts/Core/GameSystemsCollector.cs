@@ -16,6 +16,8 @@ namespace Sources.EcsBoundedContexts.Core
 		public GameSystemsCollector(
 			ProtoSystems protoSystems,
 			GameInitializeSystem gameInitializeSystem, //Order: 5 //Common
+			GameBoardSystem gameBoardSystem, //Order: 20 //Common
+			RectangleSystem rectangleSystem, //Order: 20 //Common
 			GameOverSystem gameOverSystem, //Order: 68 //Common
 			TimerSystem timerSystem, //Order: 79 //Common
 			ActiveGameObjectSystem activeGameObjectSystem //Order: 84 //Common
@@ -25,6 +27,8 @@ namespace Sources.EcsBoundedContexts.Core
 			_systems = new IProtoSystem[]
 			{
 				gameInitializeSystem, //Common
+				gameBoardSystem, //Common
+				rectangleSystem, //Common
 				gameOverSystem, //Common
 				timerSystem, //Common
 				activeGameObjectSystem, //Common

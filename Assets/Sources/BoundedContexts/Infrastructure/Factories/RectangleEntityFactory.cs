@@ -1,8 +1,11 @@
 using Leopotam.EcsProto;
 using Leopotam.EcsProto.Unity.Plugins.LeoEcsProtoCs.Leopotam.EcsProto.Unity.Runtime;
+using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Domain;
 using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core;
+using Sources.Frameworks.GameServices.EntityPools.Interfaces;
+using Sources.Frameworks.GameServices.Prefabs.Interfaces;
 using Sources.Frameworks.MyLeoEcsProto.Factories;
 using Sources.Frameworks.MyLeoEcsProto.Repositories;
 using UnityEngine;
@@ -12,7 +15,12 @@ namespace Sources.BoundedContexts.Infrastructure.Factories
 {
     public class RectangleEntityFactory : EntityFactory
     {
+        private readonly IAssetCollector _assetCollector;
+        private readonly IEntityPool _pool;
+
         public RectangleEntityFactory(
+            IAssetCollector assetCollector,
+            IEntityPoolManager poolManager,
             IEntityRepository repository,
             ProtoWorld world, 
             GameAspect aspect,
@@ -23,23 +31,35 @@ namespace Sources.BoundedContexts.Infrastructure.Factories
                 aspect,
                 container)
         {
+            _assetCollector = assetCollector;
+            _pool = poolManager.GetPool<RectangleTag>();
+            _pool.InitPool(Create);
         }
 
-        public override ProtoEntity Create(EntityLink link)
+        public ProtoEntity Create(RectangleColors color, ProtoEntity parentSlot)
         {
-            Aspect.Rectangle.NewEntity(out ProtoEntity entity);
-            Authoring(link, entity);
-            
+            ProtoEntity entity = _pool.Get();
+            RectangleConfig config = _assetCollector.Get<RectangleConfig>();
+            entity.GetRectangleModule().Value.Background.sprite = config.Sprites[color];
+            entity.AddRectangleColor(color);
+
+            if (entity.HasParentSlot())
+                entity.ReplaceParentSlot(parentSlot);
+            else
+                entity.AddParentSlot(parentSlot);
+
             return entity;
         }
-        
-        public ProtoEntity Create(EntityLink link, RectangleColors color, Sprite sprite)
+
+        private ProtoEntity Create()
         {
-            ProtoEntity entity = Create(link);
-            
+            RectangleConfig config = _assetCollector.Get<RectangleConfig>();
+            EntityLink link = Object.Instantiate(config.Rectangle);
             RectangleModule module = link.GetModule<RectangleModule>();
-            module.Background.sprite = sprite;
-            entity.AddRectangleColor(color);
+            
+            Aspect.Rectangle.NewEntity(out ProtoEntity entity);
+            Authoring(link, entity);
+            entity.AddRectangleModule(module);
             
             return entity;
         }

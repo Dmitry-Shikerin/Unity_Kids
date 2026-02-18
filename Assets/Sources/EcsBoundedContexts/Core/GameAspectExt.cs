@@ -16,6 +16,12 @@ using Leopotam.EcsProto;
 using Sources.EcsBoundedContexts.Animators;
 using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Domain;
+using Sources.BoundedContexts.Presentation;
+using Sources.BoundedContexts.Components.Slots;
+using Sources.BoundedContexts.Components.Rectangles;
+using Sources.BoundedContexts.Components.GameBoards;
+using Sources.BoundedContexts.Components.Events;
+using UnityEngine.EventSystems;
 
 namespace Sources.EcsBoundedContexts.Core
 {
@@ -434,6 +440,32 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void DelAnimator(this ProtoEntity entity)
 			=> s_GameAspect.Animator.Del(entity);
 
+		//IsOnGameBoard
+		public static bool HasIsOnGameBoard(this ProtoEntity entity) =>
+			s_GameAspect.IsOnGameBoard.Has(entity);
+
+		public static ref IsOnGameBoardComponent AddIsOnGameBoard(this ProtoEntity entity)
+		{
+			ref IsOnGameBoardComponent isOnGameBoardComponent = ref s_GameAspect.IsOnGameBoard.Add(entity);
+			return ref isOnGameBoardComponent;
+		}
+
+		public static void DelIsOnGameBoard(this ProtoEntity entity)
+			=> s_GameAspect.IsOnGameBoard.Del(entity);
+
+		//Last
+		public static bool HasLast(this ProtoEntity entity) =>
+			s_GameAspect.Last.Has(entity);
+
+		public static ref LastComponent AddLast(this ProtoEntity entity)
+		{
+			ref LastComponent lastComponent = ref s_GameAspect.Last.Add(entity);
+			return ref lastComponent;
+		}
+
+		public static void DelLast(this ProtoEntity entity)
+			=> s_GameAspect.Last.Del(entity);
+
 		//RectangleColor
 		public static bool HasRectangleColor(this ProtoEntity entity) =>
 			s_GameAspect.RectangleColor.Has(entity);
@@ -444,18 +476,41 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void ReplaceRectangleColor(this ProtoEntity entity, RectangleColors color)
 		{
 			ref RectangleColorComponent rectangleColorComponent = ref s_GameAspect.RectangleColor.Get(entity);
-			rectangleColorComponent.Color = color;
+			rectangleColorComponent.Value = color;
 		}
 
 		public static ref RectangleColorComponent AddRectangleColor(this ProtoEntity entity, RectangleColors color)
 		{
 			ref RectangleColorComponent rectangleColorComponent = ref s_GameAspect.RectangleColor.Add(entity);
-			rectangleColorComponent.Color = color;
+			rectangleColorComponent.Value = color;
 			return ref rectangleColorComponent;
 		}
 
 		public static void DelRectangleColor(this ProtoEntity entity)
 			=> s_GameAspect.RectangleColor.Del(entity);
+
+		//RectangleModule
+		public static bool HasRectangleModule(this ProtoEntity entity) =>
+			s_GameAspect.RectangleModule.Has(entity);
+
+		public static ref RectangleModuleComponent GetRectangleModule(this ProtoEntity entity) =>
+			ref s_GameAspect.RectangleModule.Get(entity);
+
+		public static void ReplaceRectangleModule(this ProtoEntity entity, RectangleModule value)
+		{
+			ref RectangleModuleComponent rectangleModuleComponent = ref s_GameAspect.RectangleModule.Get(entity);
+			rectangleModuleComponent.Value = value;
+		}
+
+		public static ref RectangleModuleComponent AddRectangleModule(this ProtoEntity entity, RectangleModule value)
+		{
+			ref RectangleModuleComponent rectangleModuleComponent = ref s_GameAspect.RectangleModule.Add(entity);
+			rectangleModuleComponent.Value = value;
+			return ref rectangleModuleComponent;
+		}
+
+		public static void DelRectangleModule(this ProtoEntity entity)
+			=> s_GameAspect.RectangleModule.Del(entity);
 
 		//Rectangle
 		public static bool HasRectangle(this ProtoEntity entity) =>
@@ -469,6 +524,265 @@ namespace Sources.EcsBoundedContexts.Core
 
 		public static void DelRectangle(this ProtoEntity entity)
 			=> s_GameAspect.Rectangle.Del(entity);
+
+		//ChildRectangle
+		public static bool HasChildRectangle(this ProtoEntity entity) =>
+			s_GameAspect.ChildRectangle.Has(entity);
+
+		public static ref ChildRectangleComponent GetChildRectangle(this ProtoEntity entity) =>
+			ref s_GameAspect.ChildRectangle.Get(entity);
+
+		public static void ReplaceChildRectangle(this ProtoEntity entity, ProtoEntity value)
+		{
+			ref ChildRectangleComponent childRectangleComponent = ref s_GameAspect.ChildRectangle.Get(entity);
+			childRectangleComponent.Value = value;
+		}
+
+		public static ref ChildRectangleComponent AddChildRectangle(this ProtoEntity entity, ProtoEntity value)
+		{
+			ref ChildRectangleComponent childRectangleComponent = ref s_GameAspect.ChildRectangle.Add(entity);
+			childRectangleComponent.Value = value;
+			return ref childRectangleComponent;
+		}
+
+		public static void DelChildRectangle(this ProtoEntity entity)
+			=> s_GameAspect.ChildRectangle.Del(entity);
+
+		//RectangleSlotColor
+		public static bool HasRectangleSlotColor(this ProtoEntity entity) =>
+			s_GameAspect.RectangleSlotColor.Has(entity);
+
+		public static ref RectangleSlotColor GetRectangleSlotColor(this ProtoEntity entity) =>
+			ref s_GameAspect.RectangleSlotColor.Get(entity);
+
+		public static void ReplaceRectangleSlotColor(this ProtoEntity entity, RectangleColors value)
+		{
+			ref RectangleSlotColor rectangleSlotColor = ref s_GameAspect.RectangleSlotColor.Get(entity);
+			rectangleSlotColor.Value = value;
+		}
+
+		public static ref RectangleSlotColor AddRectangleSlotColor(this ProtoEntity entity, RectangleColors value)
+		{
+			ref RectangleSlotColor rectangleSlotColor = ref s_GameAspect.RectangleSlotColor.Add(entity);
+			rectangleSlotColor.Value = value;
+			return ref rectangleSlotColor;
+		}
+
+		public static void DelRectangleSlotColor(this ProtoEntity entity)
+			=> s_GameAspect.RectangleSlotColor.Del(entity);
+
+		//RectangleSlotModule
+		public static bool HasRectangleSlotModule(this ProtoEntity entity) =>
+			s_GameAspect.RectangleSlotModule.Has(entity);
+
+		public static ref RectangleSlotModuleComponent GetRectangleSlotModule(this ProtoEntity entity) =>
+			ref s_GameAspect.RectangleSlotModule.Get(entity);
+
+		public static void ReplaceRectangleSlotModule(this ProtoEntity entity, RectangleSlotModule value)
+		{
+			ref RectangleSlotModuleComponent rectangleSlotModuleComponent = ref s_GameAspect.RectangleSlotModule.Get(entity);
+			rectangleSlotModuleComponent.Value = value;
+		}
+
+		public static ref RectangleSlotModuleComponent AddRectangleSlotModule(this ProtoEntity entity, RectangleSlotModule value)
+		{
+			ref RectangleSlotModuleComponent rectangleSlotModuleComponent = ref s_GameAspect.RectangleSlotModule.Add(entity);
+			rectangleSlotModuleComponent.Value = value;
+			return ref rectangleSlotModuleComponent;
+		}
+
+		public static void DelRectangleSlotModule(this ProtoEntity entity)
+			=> s_GameAspect.RectangleSlotModule.Del(entity);
+
+		//RectangleSlot
+		public static bool HasRectangleSlot(this ProtoEntity entity) =>
+			s_GameAspect.RectangleSlot.Has(entity);
+
+		public static ref RectangleSlotTag AddRectangleSlot(this ProtoEntity entity)
+		{
+			ref RectangleSlotTag rectangleSlotTag = ref s_GameAspect.RectangleSlot.Add(entity);
+			return ref rectangleSlotTag;
+		}
+
+		public static void DelRectangleSlot(this ProtoEntity entity)
+			=> s_GameAspect.RectangleSlot.Del(entity);
+
+		//ParentSlot
+		public static bool HasParentSlot(this ProtoEntity entity) =>
+			s_GameAspect.ParentSlot.Has(entity);
+
+		public static ref ParentSlotComponent GetParentSlot(this ProtoEntity entity) =>
+			ref s_GameAspect.ParentSlot.Get(entity);
+
+		public static void ReplaceParentSlot(this ProtoEntity entity, ProtoEntity value)
+		{
+			ref ParentSlotComponent parentSlotComponent = ref s_GameAspect.ParentSlot.Get(entity);
+			parentSlotComponent.Value = value;
+		}
+
+		public static ref ParentSlotComponent AddParentSlot(this ProtoEntity entity, ProtoEntity value)
+		{
+			ref ParentSlotComponent parentSlotComponent = ref s_GameAspect.ParentSlot.Add(entity);
+			parentSlotComponent.Value = value;
+			return ref parentSlotComponent;
+		}
+
+		public static void DelParentSlot(this ProtoEntity entity)
+			=> s_GameAspect.ParentSlot.Del(entity);
+
+		//GameBoardModule
+		public static bool HasGameBoardModule(this ProtoEntity entity) =>
+			s_GameAspect.GameBoardModule.Has(entity);
+
+		public static ref GameBoardModuleComponent GetGameBoardModule(this ProtoEntity entity) =>
+			ref s_GameAspect.GameBoardModule.Get(entity);
+
+		public static void ReplaceGameBoardModule(this ProtoEntity entity, GameBoardModule value)
+		{
+			ref GameBoardModuleComponent gameBoardModuleComponent = ref s_GameAspect.GameBoardModule.Get(entity);
+			gameBoardModuleComponent.Value = value;
+		}
+
+		public static ref GameBoardModuleComponent AddGameBoardModule(this ProtoEntity entity, GameBoardModule value)
+		{
+			ref GameBoardModuleComponent gameBoardModuleComponent = ref s_GameAspect.GameBoardModule.Add(entity);
+			gameBoardModuleComponent.Value = value;
+			return ref gameBoardModuleComponent;
+		}
+
+		public static void DelGameBoardModule(this ProtoEntity entity)
+			=> s_GameAspect.GameBoardModule.Del(entity);
+
+		//GameBoard
+		public static bool HasGameBoard(this ProtoEntity entity) =>
+			s_GameAspect.GameBoard.Has(entity);
+
+		public static ref GameBoardTag AddGameBoard(this ProtoEntity entity)
+		{
+			ref GameBoardTag gameBoardTag = ref s_GameAspect.GameBoard.Add(entity);
+			return ref gameBoardTag;
+		}
+
+		public static void DelGameBoard(this ProtoEntity entity)
+			=> s_GameAspect.GameBoard.Del(entity);
+
+		//DestroyEvent
+		public static bool HasDestroyEvent(this ProtoEntity entity) =>
+			s_GameAspect.DestroyEvent.Has(entity);
+
+		public static ref DestroyEvent AddDestroyEvent(this ProtoEntity entity)
+		{
+			ref DestroyEvent destroyEvent = ref s_GameAspect.DestroyEvent.Add(entity);
+			return ref destroyEvent;
+		}
+
+		public static void DelDestroyEvent(this ProtoEntity entity)
+			=> s_GameAspect.DestroyEvent.Del(entity);
+
+		//FillSlotEvent
+		public static bool HasFillSlotEvent(this ProtoEntity entity) =>
+			s_GameAspect.FillSlotEvent.Has(entity);
+
+		public static ref FillSlotEvent AddFillSlotEvent(this ProtoEntity entity)
+		{
+			ref FillSlotEvent fillSlotEvent = ref s_GameAspect.FillSlotEvent.Add(entity);
+			return ref fillSlotEvent;
+		}
+
+		public static void DelFillSlotEvent(this ProtoEntity entity)
+			=> s_GameAspect.FillSlotEvent.Del(entity);
+
+		//MoveToEvent
+		public static bool HasMoveToEvent(this ProtoEntity entity) =>
+			s_GameAspect.MoveToEvent.Has(entity);
+
+		public static ref MoveToEvent GetMoveToEvent(this ProtoEntity entity) =>
+			ref s_GameAspect.MoveToEvent.Get(entity);
+
+		public static void ReplaceMoveToEvent(this ProtoEntity entity, Vector3 value)
+		{
+			ref MoveToEvent moveToEvent = ref s_GameAspect.MoveToEvent.Get(entity);
+			moveToEvent.Value = value;
+		}
+
+		public static ref MoveToEvent AddMoveToEvent(this ProtoEntity entity, Vector3 value)
+		{
+			ref MoveToEvent moveToEvent = ref s_GameAspect.MoveToEvent.Add(entity);
+			moveToEvent.Value = value;
+			return ref moveToEvent;
+		}
+
+		public static void DelMoveToEvent(this ProtoEntity entity)
+			=> s_GameAspect.MoveToEvent.Del(entity);
+
+		//OnBeginDragEvent
+		public static bool HasOnBeginDragEvent(this ProtoEntity entity) =>
+			s_GameAspect.OnBeginDragEvent.Has(entity);
+
+		public static ref OnBeginDragEvent GetOnBeginDragEvent(this ProtoEntity entity) =>
+			ref s_GameAspect.OnBeginDragEvent.Get(entity);
+
+		public static void ReplaceOnBeginDragEvent(this ProtoEntity entity, PointerEventData value)
+		{
+			ref OnBeginDragEvent onBeginDragEvent = ref s_GameAspect.OnBeginDragEvent.Get(entity);
+			onBeginDragEvent.Value = value;
+		}
+
+		public static ref OnBeginDragEvent AddOnBeginDragEvent(this ProtoEntity entity, PointerEventData value)
+		{
+			ref OnBeginDragEvent onBeginDragEvent = ref s_GameAspect.OnBeginDragEvent.Add(entity);
+			onBeginDragEvent.Value = value;
+			return ref onBeginDragEvent;
+		}
+
+		public static void DelOnBeginDragEvent(this ProtoEntity entity)
+			=> s_GameAspect.OnBeginDragEvent.Del(entity);
+
+		//OnDropEvent
+		public static bool HasOnDropEvent(this ProtoEntity entity) =>
+			s_GameAspect.OnDropEvent.Has(entity);
+
+		public static ref OnDropEvent GetOnDropEvent(this ProtoEntity entity) =>
+			ref s_GameAspect.OnDropEvent.Get(entity);
+
+		public static void ReplaceOnDropEvent(this ProtoEntity entity, PointerEventData value)
+		{
+			ref OnDropEvent onDropEvent = ref s_GameAspect.OnDropEvent.Get(entity);
+			onDropEvent.Value = value;
+		}
+
+		public static ref OnDropEvent AddOnDropEvent(this ProtoEntity entity, PointerEventData value)
+		{
+			ref OnDropEvent onDropEvent = ref s_GameAspect.OnDropEvent.Add(entity);
+			onDropEvent.Value = value;
+			return ref onDropEvent;
+		}
+
+		public static void DelOnDropEvent(this ProtoEntity entity)
+			=> s_GameAspect.OnDropEvent.Del(entity);
+
+		//OnEndDragEvent
+		public static bool HasOnEndDragEvent(this ProtoEntity entity) =>
+			s_GameAspect.OnEndDragEvent.Has(entity);
+
+		public static ref OnEndDragEvent GetOnEndDragEvent(this ProtoEntity entity) =>
+			ref s_GameAspect.OnEndDragEvent.Get(entity);
+
+		public static void ReplaceOnEndDragEvent(this ProtoEntity entity, PointerEventData value)
+		{
+			ref OnEndDragEvent onEndDragEvent = ref s_GameAspect.OnEndDragEvent.Get(entity);
+			onEndDragEvent.Value = value;
+		}
+
+		public static ref OnEndDragEvent AddOnEndDragEvent(this ProtoEntity entity, PointerEventData value)
+		{
+			ref OnEndDragEvent onEndDragEvent = ref s_GameAspect.OnEndDragEvent.Add(entity);
+			onEndDragEvent.Value = value;
+			return ref onEndDragEvent;
+		}
+
+		public static void DelOnEndDragEvent(this ProtoEntity entity)
+			=> s_GameAspect.OnEndDragEvent.Del(entity);
 
 	}
 }

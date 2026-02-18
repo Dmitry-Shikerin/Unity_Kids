@@ -1,6 +1,7 @@
 using Leopotam.EcsProto;
 using Leopotam.EcsProto.QoL;
 using Leopotam.EcsProto.Unity;
+using Sources.BoundedContexts.Components.Events;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
 using Sources.EcsBoundedContexts.GameObjects.Domain;
 using Sources.EcsBoundedContexts.SaveLoads.Domain;
@@ -64,6 +65,11 @@ namespace Sources.EcsBoundedContexts.Core
             _systems.DelHere<IncreaseEvent>();
             _systems.DelHere<DecreaseEvent>();
             _systems.DelHere<InitializeEvent>();
+            _systems.DelHere<OnBeginDragEvent>();
+            _systems.DelHere<MoveToEvent>();
+            _systems.DelHere<OnDropEvent>();
+            _systems.DelHere<DestroyEvent>();
+            _systems.DelHere<FillSlotEvent>();
         }
         
         private void Init()

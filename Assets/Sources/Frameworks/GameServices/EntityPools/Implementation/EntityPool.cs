@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Leopotam.EcsProto;
 using Sources.EcsBoundedContexts.Core;
-using Sources.Frameworks.MyLeoEcsProto.ObjectPools.Interfaces;
+using Sources.Frameworks.GameServices.EntityPools.Interfaces;
 using UnityEngine;
 
 namespace Sources.Frameworks.GameServices.EntityPools.Implementation

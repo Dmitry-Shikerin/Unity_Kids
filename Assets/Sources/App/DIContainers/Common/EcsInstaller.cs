@@ -31,6 +31,8 @@ namespace Sources.App.DIContainers.Common
             Container.Bind<IEntityPoolManager>().To<EntityPoolManager>().AsSingle();
             
             Container.Bind<RectangleEntityFactory>().AsSingle();
+            Container.Bind<GameBoardEntityFactory>().AsSingle();
+            Container.Bind<SlotEntityFactory>().AsSingle();
         }
     }
 }

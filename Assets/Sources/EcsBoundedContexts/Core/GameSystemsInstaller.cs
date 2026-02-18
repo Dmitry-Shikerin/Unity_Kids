@@ -14,6 +14,8 @@ namespace Sources.EcsBoundedContexts.Core
 
 			//Common
 			container.Bind<GameInitializeSystem>().AsSingle();
+			container.Bind<GameBoardSystem>().AsSingle();
+			container.Bind<RectangleSystem>().AsSingle();
 			container.Bind<GameOverSystem>().AsSingle();
 			container.Bind<TimerSystem>().AsSingle();
 			container.Bind<ActiveGameObjectSystem>().AsSingle();

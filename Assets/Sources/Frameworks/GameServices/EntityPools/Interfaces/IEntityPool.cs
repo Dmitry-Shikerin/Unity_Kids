@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Leopotam.EcsProto;
 
-namespace Sources.Frameworks.MyLeoEcsProto.ObjectPools.Interfaces
+namespace Sources.Frameworks.GameServices.EntityPools.Interfaces
 {
     public interface IEntityPool
     {

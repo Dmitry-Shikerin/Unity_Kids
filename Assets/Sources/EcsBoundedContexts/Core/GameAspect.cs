@@ -10,6 +10,10 @@ using Sources.EcsBoundedContexts.GameObjects.Domain;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
 using Sources.EcsBoundedContexts.Animators;
 using Sources.BoundedContexts.Components;
+using Sources.BoundedContexts.Components.Slots;
+using Sources.BoundedContexts.Components.Rectangles;
+using Sources.BoundedContexts.Components.GameBoards;
+using Sources.BoundedContexts.Components.Events;
 
 namespace Sources.EcsBoundedContexts.Core
 {
@@ -48,8 +52,24 @@ namespace Sources.EcsBoundedContexts.Core
 		public readonly ProtoPool<EventBufferTag> EventBuffer = new ();
 
 		//Rectangle
+		public readonly ProtoPool<IsOnGameBoardComponent> IsOnGameBoard = new ();
+		public readonly ProtoPool<LastComponent> Last = new ();
 		public readonly ProtoPool<RectangleColorComponent> RectangleColor = new ();
+		public readonly ProtoPool<RectangleModuleComponent> RectangleModule = new ();
 		public readonly ProtoPool<RectangleTag> Rectangle = new ();
+		public readonly ProtoPool<ChildRectangleComponent> ChildRectangle = new ();
+		public readonly ProtoPool<RectangleSlotColor> RectangleSlotColor = new ();
+		public readonly ProtoPool<RectangleSlotModuleComponent> RectangleSlotModule = new ();
+		public readonly ProtoPool<RectangleSlotTag> RectangleSlot = new ();
+		public readonly ProtoPool<ParentSlotComponent> ParentSlot = new ();
+		public readonly ProtoPool<GameBoardModuleComponent> GameBoardModule = new ();
+		public readonly ProtoPool<GameBoardTag> GameBoard = new ();
+		public readonly ProtoPool<DestroyEvent> DestroyEvent = new ();
+		public readonly ProtoPool<FillSlotEvent> FillSlotEvent = new ();
+		public readonly ProtoPool<MoveToEvent> MoveToEvent = new ();
+		public readonly ProtoPool<OnBeginDragEvent> OnBeginDragEvent = new ();
+		public readonly ProtoPool<OnDropEvent> OnDropEvent = new ();
+		public readonly ProtoPool<OnEndDragEvent> OnEndDragEvent = new ();
 
 		public GameAspect()
 		{
@@ -79,8 +99,24 @@ namespace Sources.EcsBoundedContexts.Core
 				[typeof(ProtoPool<StringIdComponent>)] = StringId,
 				[typeof(ProtoPool<TransformComponent>)] = Transform,
 				[typeof(ProtoPool<AnimatorComponent>)] = Animator,
+				[typeof(ProtoPool<IsOnGameBoardComponent>)] = IsOnGameBoard,
+				[typeof(ProtoPool<LastComponent>)] = Last,
 				[typeof(ProtoPool<RectangleColorComponent>)] = RectangleColor,
+				[typeof(ProtoPool<RectangleModuleComponent>)] = RectangleModule,
 				[typeof(ProtoPool<RectangleTag>)] = Rectangle,
+				[typeof(ProtoPool<ChildRectangleComponent>)] = ChildRectangle,
+				[typeof(ProtoPool<RectangleSlotColor>)] = RectangleSlotColor,
+				[typeof(ProtoPool<RectangleSlotModuleComponent>)] = RectangleSlotModule,
+				[typeof(ProtoPool<RectangleSlotTag>)] = RectangleSlot,
+				[typeof(ProtoPool<ParentSlotComponent>)] = ParentSlot,
+				[typeof(ProtoPool<GameBoardModuleComponent>)] = GameBoardModule,
+				[typeof(ProtoPool<GameBoardTag>)] = GameBoard,
+				[typeof(ProtoPool<DestroyEvent>)] = DestroyEvent,
+				[typeof(ProtoPool<FillSlotEvent>)] = FillSlotEvent,
+				[typeof(ProtoPool<MoveToEvent>)] = MoveToEvent,
+				[typeof(ProtoPool<OnBeginDragEvent>)] = OnBeginDragEvent,
+				[typeof(ProtoPool<OnDropEvent>)] = OnDropEvent,
+				[typeof(ProtoPool<OnEndDragEvent>)] = OnEndDragEvent,
 			};
 
 			GameAspectExt.Construct(this);
