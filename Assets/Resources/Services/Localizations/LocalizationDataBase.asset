@@ -1,5 +1,115 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8338105554783486192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: MissedPlayingField_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: MissedPlayingField
+  <TextId>k__BackingField: MissedPlayingField
+  _editRussian: 0
+  <Russian>k__BackingField: "\u041D\u0435 \u043F\u043E\u043F\u0430\u043B \u0432 \u0438\u0433\u0440\u043E\u0432\u043E\u0435
+    \u043F\u043E\u043B\u0435"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: Missed the playing field
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: 
+  <TurkishSprite>k__BackingField: {fileID: 0}
+--- !u!114 &-8111389602614109915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: MissedTower_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: MissedTower
+  <TextId>k__BackingField: MissedTower
+  _editRussian: 0
+  <Russian>k__BackingField: "\u041D\u0435 \u043F\u043E\u043F\u0430\u043B \u0432 \u0431\u0430\u0448\u043D\u044E"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: Missed the tower
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: "Kuleye vurmad\u0131m"
+  <TurkishSprite>k__BackingField: {fileID: 0}
+--- !u!114 &-6991974552956913207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: PlaceCube_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: PlaceCube
+  <TextId>k__BackingField: PlaceCube
+  _editRussian: 0
+  <Russian>k__BackingField: "\u041A\u0443\u0431\u0438\u043A \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D
+    \u043D\u0430 \u0432\u0435\u0440\u0445 \u0431\u0430\u0448\u043D\u0438"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: The cube is mounted on the top of the tower
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: "K\xFCp kulenin tepesine monte edilmi\u015Ftir"
+  <TurkishSprite>k__BackingField: {fileID: 0}
+--- !u!114 &-3653404605595583331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: GameOver_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: GameOver
+  <TextId>k__BackingField: GameOver
+  _editRussian: 0
+  <Russian>k__BackingField: "\u041A\u043E\u043D\u0435\u0446 \u0438\u0433\u0440\u044B"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: Game over
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: 
+  <TurkishSprite>k__BackingField: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,14 +123,162 @@ MonoBehaviour:
   m_Name: LocalizationDataBase
   m_EditorClassIdentifier: 
   _headere: <size=18><b><color=#FF7F50><i>UiLocalizationDataBase</i></color></b></size>
-  _phrases: []
+  _phrases:
+  - {fileID: -8111389602614109915}
+  - {fileID: -6991974552956913207}
+  - {fileID: 4630537916562243589}
+  - {fileID: 7133599129424594951}
+  - {fileID: -8338105554783486192}
+  - {fileID: -3653404605595583331}
+  - {fileID: 3797350595439551251}
+  - {fileID: 3506617103853505857}
+  - {fileID: 5303357733051816369}
   _scopes: []
-  <Language>k__BackingField: 0
-  enableStateTextId: 0
-  _textId: 
-  enableStateRussian: 0
-  _russian: 
-  enableStateEnglish: 0
-  _english: 
-  enableStateTurkish: 0
+  <Language>k__BackingField: 1
+  enableStateTextId: 1
+  _textId: LoadGame
+  enableStateRussian: 1
+  _russian: "\u0417\u0410\u0413\u0420\u0423\u0417\u0418\u0422\u042C \u0418\u0413\u0420\u0423"
+  enableStateEnglish: 1
+  _english: LOAD GAME
+  enableStateTurkish: 1
   _turkish: 
+--- !u!114 &3506617103853505857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: SavedGame_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: SavedGame
+  <TextId>k__BackingField: SavedGame
+  _editRussian: 0
+  <Russian>k__BackingField: "\u0423 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u0430\u044F
+    \u0438\u0433\u0440\u0430"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: Do you have a saved game
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: 
+  <TurkishSprite>k__BackingField: {fileID: 0}
+--- !u!114 &3797350595439551251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: NewGame_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: NewGame
+  <TextId>k__BackingField: NewGame
+  _editRussian: 0
+  <Russian>k__BackingField: "\u041D\u041E\u0412\u0410\u042F \u0418\u0413\u0420\u0410"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: NEW GAME
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: 
+  <TurkishSprite>k__BackingField: {fileID: 0}
+--- !u!114 &4630537916562243589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: NoGettingIntoHole_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: NoGettingIntoHole
+  <TextId>k__BackingField: NoGettingIntoHole
+  _editRussian: 0
+  <Russian>k__BackingField: "\u041D\u0435\u0442 \u043F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u044F
+    \u0432 \u0434\u044B\u0440\u0443"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: No getting into the hole
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: 
+  <TurkishSprite>k__BackingField: {fileID: 0}
+--- !u!114 &5303357733051816369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: LoadGame_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: LoadGame
+  <TextId>k__BackingField: LoadGame
+  _editRussian: 0
+  <Russian>k__BackingField: "\u0417\u0410\u0413\u0420\u0423\u0417\u0418\u0422\u042C
+    \u0418\u0413\u0420\u0423"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: LOAD GAME
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: 
+  <TurkishSprite>k__BackingField: {fileID: 0}
+--- !u!114 &7133599129424594951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b47770bff74a2d91593ebd8dcce095, type: 3}
+  m_Name: HittingHole_Phrase
+  m_EditorClassIdentifier: 
+  _headere: <size=18><b><color=#FF7F50><i>UiLocalizationPhrase</i></color></b></size>
+  _editParent: 0
+  <Parent>k__BackingField: {fileID: 11400000}
+  <Scope>k__BackingField: {fileID: 0}
+  <LocalizationId>k__BackingField: HittingHole
+  <TextId>k__BackingField: HittingHole
+  _editRussian: 0
+  <Russian>k__BackingField: "\u041F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u0435
+    \u0432 \u0434\u044B\u0440\u0443"
+  <RussianSprite>k__BackingField: {fileID: 0}
+  _editEnglish: 0
+  <English>k__BackingField: Hitting the hole
+  <EnglishSprite>k__BackingField: {fileID: 0}
+  _editTurkish: 0
+  <Turkish>k__BackingField: 
+  <TurkishSprite>k__BackingField: {fileID: 0}

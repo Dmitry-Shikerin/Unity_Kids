@@ -30,7 +30,7 @@ namespace Sources.Frameworks.GameServices.DeepWrappers.Localizations
                 LocalizationLanguage.English => LocalizationConst.English,
                 LocalizationLanguage.Turkish => LocalizationConst.Turkish,
                 LocalizationLanguage.Russian => LocalizationConst.Russian,
-                _ => LocalizationConst.English,
+                LocalizationLanguage.Default => LocalizationConst.Russian,
             };
         }
     }

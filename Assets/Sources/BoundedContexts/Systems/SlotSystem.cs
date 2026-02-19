@@ -39,6 +39,7 @@ namespace Sources.BoundedContexts.Systems
                 RectangleModule rectangleModule = rectangleEntity.GetRectangleModule().Value;
                 rectangleModule.transform.SetParent(slotModule.transform);
                 rectangleModule.transform.localPosition = Vector3.zero;
+                rectangleModule.CanvasGroup.alpha = 1;
             }
         }
     }

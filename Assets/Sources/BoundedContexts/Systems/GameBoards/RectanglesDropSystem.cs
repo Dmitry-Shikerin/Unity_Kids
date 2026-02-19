@@ -1,8 +1,8 @@
 using Leopotam.EcsProto;
 using Leopotam.EcsProto.QoL;
-using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Components.Events;
 using Sources.BoundedContexts.Components.GameBoards;
+using Sources.BoundedContexts.Components.Rectangles;
 using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
 using Sources.EcsBoundedContexts.Core;
@@ -27,7 +27,7 @@ namespace Sources.BoundedContexts.Systems.GameBoards
         [DI] private readonly ProtoItExc _rectanglesIt = new(
             It.Inc<
                 RectangleTag,
-                IsOnGameBoardComponent>(),
+                InGameBoardComponent>(),
             It.Exc<InPoolComponent>());
         [DI] private readonly ProtoIt _lastIt = new(
             It.Inc<
@@ -36,7 +36,7 @@ namespace Sources.BoundedContexts.Systems.GameBoards
         
         public void Run()
         {
-            foreach (ProtoEntity entity in _gameBoardDropIt)
+            foreach (ProtoEntity _ in _gameBoardDropIt)
             {
                 int index = 0;
                 ProtoEntity temp = default;
@@ -57,8 +57,9 @@ namespace Sources.BoundedContexts.Systems.GameBoards
                         continue;
                     }
                     
-                    entityModule.transform.position = 
-                        new Vector3(entityModule.transform.position.x, temp.GetRectangleModule().Value.TopTransform.position.y);
+                    entityModule.transform.position = new Vector3(
+                            entityModule.transform.position.x, 
+                            temp.GetRectangleModule().Value.TopTransform.position.y);
                     temp = itEntity;
                 }
 

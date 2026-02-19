@@ -146,6 +146,6 @@ namespace Sources.Frameworks.DeepFramework.DeepLocalization.Runtime.Domain.Data
 
         [UsedImplicitly]
         private List<string> GetDropdownValues() =>
-            LocalizationDataBase.Instance.Phrases.Select(phrase => phrase.LocalizationId).ToList();
+            LocalizationDataBase.Instance.Phrases.Select(phrase => phrase.TextId).ToList();
     }
 }

@@ -4,7 +4,7 @@ using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
 
-namespace Sources.BoundedContexts.Components
+namespace Sources.BoundedContexts.Components.Rectangles
 {
     [Serializable] 
     [ProtoUnityAuthoring]

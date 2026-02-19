@@ -13,5 +13,6 @@ namespace Sources.BoundedContexts.Components.Events
     public struct MoveToEvent
     {
         public Vector3 Value;
+        public Action OnComplete;
     }
 }

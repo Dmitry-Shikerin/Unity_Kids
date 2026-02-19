@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sources.App.Core;
 using Sources.EcsBoundedContexts.Common.Domain.Constants;
-using Sources.Frameworks.GameServices.Curtains.Presentation.Implementation;
-using Sources.Frameworks.GameServices.Curtains.Presentation.Interfaces;
-using Sources.Frameworks.GameServices.Prefabs.Domain;
 using Sources.Frameworks.GameServices.SceneLoaderServices.Interfaces;
 using Sources.Frameworks.GameServices.Scenes.Controllers.Interfaces;
 using Sources.Frameworks.GameServices.Scenes.Infrastructure.Factories.Controllers.Interfaces;
@@ -24,12 +21,7 @@ namespace Sources.App.Factories
             AppCore appCore = new GameObject(nameof(AppCore)).AddComponent<AppCore>();
 
             ProjectContext projectContext = Object.FindObjectOfType<ProjectContext>();
-            // CurtainView curtainView =
-            //     Object.Instantiate(Resources.Load<CurtainView>(ResourcesPrefabPath.Curtain)) ??
-            //     throw new NullReferenceException(nameof(CurtainView));
-            //projectContext.Container.Bind<ICurtainView>().FromInstance(curtainView).AsSingle();
             ISceneLoaderService sceneLoaderService = projectContext.Container.Resolve<ISceneLoaderService>();
-            //curtainView.Hide();
             
             Dictionary<string, Func<object, SceneContext, UniTask<IScene>>> sceneFactories =
                 new Dictionary<string, Func<object, SceneContext, UniTask<IScene>>>();
@@ -38,8 +30,7 @@ namespace Sources.App.Factories
             
             sceneFactories[IdsConst.Gameplay] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<ISceneFactory>().Create(payload);            
-
-            //sceneService.AddBeforeSceneChangeHandler(async _ => await curtainView.ShowAsync());
+            
             sceneService.AddBeforeSceneChangeHandler(async sceneName => await sceneLoaderService.Load(sceneName));
 
             appCore.Construct(sceneService);

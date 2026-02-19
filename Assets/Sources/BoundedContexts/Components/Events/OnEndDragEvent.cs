@@ -3,7 +3,6 @@ using Leopotam.EcsProto.Unity;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Sources.BoundedContexts.Components.Events
 {

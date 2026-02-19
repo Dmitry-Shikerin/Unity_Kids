@@ -21,7 +21,6 @@ namespace Sources.App.DIContainers.Gameplay
             Container.Bind<ISceneFactory>().To<GameplaySceneFactory>().AsSingle();
             Container.Bind<ICompositeAssetService>().To<GameplayAssetService>().AsSingle();
             
-            //ECS
             Container.Bind<ISystemsCollector>().To<GameSystemsCollector>().AsSingle();
             GameSystemsInstaller.InstallBindings(Container);
         }

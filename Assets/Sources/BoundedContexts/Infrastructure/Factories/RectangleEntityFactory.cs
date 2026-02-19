@@ -1,6 +1,6 @@
 using Leopotam.EcsProto;
 using Leopotam.EcsProto.Unity.Plugins.LeoEcsProtoCs.Leopotam.EcsProto.Unity.Runtime;
-using Sources.BoundedContexts.Components;
+using Sources.BoundedContexts.Components.Rectangles;
 using Sources.BoundedContexts.Domain;
 using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core;
@@ -51,6 +51,20 @@ namespace Sources.BoundedContexts.Infrastructure.Factories
                 entity.ReplaceParentSlot(parentSlot);
             else
                 entity.AddParentSlot(parentSlot);
+
+            return entity;
+        }
+
+        public ProtoEntity Create(RectangleColors color)
+        {
+            ProtoEntity entity = _pool.Get();
+            RectangleConfig config = _assetCollector.Get<RectangleConfig>();
+            entity.GetRectangleModule().Value.Background.sprite = config.Sprites[color];
+
+            if (entity.HasRectangleColor())
+                entity.ReplaceRectangleColor(color);
+            else
+                entity.AddRectangleColor(color);
 
             return entity;
         }

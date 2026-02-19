@@ -4,7 +4,9 @@ using Sources.Frameworks.GameServices.Scenes.Domain.Implementation;
 using Sources.Frameworks.GameServices.Scenes.Services.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if !UNITY_EDITOR
 using Sources.EcsBoundedContexts.Common.Domain.Constants;
+#endif
 
 namespace Sources.App.Core
 {

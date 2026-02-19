@@ -3,9 +3,8 @@ using Leopotam.EcsProto.Unity;
 using Sources.BoundedContexts.Domain;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
-using UnityEngine.Serialization;
 
-namespace Sources.BoundedContexts.Components
+namespace Sources.BoundedContexts.Components.Rectangles
 {
     [Serializable] 
     [ProtoUnityAuthoring]

@@ -26,13 +26,12 @@ namespace Sources.App.DIContainers.Common
             Container.Bind<IEventBuffer>().To<EventBuffer>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
             Container.Bind<IFeatureService>().To<FeatureService>().AsSingle();
-            
-            //Pools
             Container.Bind<IEntityPoolManager>().To<EntityPoolManager>().AsSingle();
             
             Container.Bind<RectangleEntityFactory>().AsSingle();
             Container.Bind<GameBoardEntityFactory>().AsSingle();
             Container.Bind<SlotEntityFactory>().AsSingle();
+            Container.Bind<GameEntityFactory>().AsSingle();
         }
     }
 }

@@ -4,15 +4,13 @@ using Leopotam.EcsProto;
 using Leopotam.EcsProto.QoL;
 using Sources.Frameworks.MyLeoEcsProto.EventBuffers.Implementation;
 using Sources.Frameworks.GameServices.EntityPools.Domain.Components;
-using Sources.EcsBoundedContexts.Timers.Domain;
 using Sources.EcsBoundedContexts.SaveLoads.Domain;
 using Sources.EcsBoundedContexts.GameObjects.Domain;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
-using Sources.EcsBoundedContexts.Animators;
-using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Components.Slots;
 using Sources.BoundedContexts.Components.Rectangles;
 using Sources.BoundedContexts.Components.GameBoards;
+using Sources.BoundedContexts.Components.Game;
 using Sources.BoundedContexts.Components.Events;
 
 namespace Sources.EcsBoundedContexts.Core
@@ -25,7 +23,6 @@ namespace Sources.EcsBoundedContexts.Core
 
 		//Common
 		public readonly ProtoPool<ReturnToPoolActionComponent> ReturnToPoolAction = new ();
-		public readonly ProtoPool<TimerComponent> Timer = new ();
 		public readonly ProtoPool<ClearableDataComponent> ClearableData = new ();
 		public readonly ProtoPool<ClearDataEvent> ClearDataEvent = new ();
 		public readonly ProtoPool<SavableDataComponent> SavableData = new ();
@@ -34,25 +31,15 @@ namespace Sources.EcsBoundedContexts.Core
 		public readonly ProtoPool<DisableGameObjectEvent> DisableGameObjectEvent = new ();
 		public readonly ProtoPool<EnableGameObjectEvent> EnableGameObjectEvent = new ();
 		public readonly ProtoPool<GameObjectComponent> GameObject = new ();
-		public readonly ProtoPool<AvailableComponent> Available = new ();
-		public readonly ProtoPool<CompleteComponent> Complete = new ();
-		public readonly ProtoPool<DecreaseEvent> DecreaseEvent = new ();
-		public readonly ProtoPool<DistanceComponent> Distance = new ();
 		public readonly ProtoPool<EntityLinkComponent> EntityLink = new ();
-		public readonly ProtoPool<IncreaseEvent> IncreaseEvent = new ();
-		public readonly ProtoPool<InitializedComponent> Initialized = new ();
-		public readonly ProtoPool<InitializeEvent> InitializeEvent = new ();
 		public readonly ProtoPool<InPoolComponent> InPool = new ();
-		public readonly ProtoPool<ScaleComponent> Scale = new ();
-		public readonly ProtoPool<StringIdComponent> StringId = new ();
 		public readonly ProtoPool<TransformComponent> Transform = new ();
-		public readonly ProtoPool<AnimatorComponent> Animator = new ();
 
 		//EventBuffer
 		public readonly ProtoPool<EventBufferTag> EventBuffer = new ();
 
 		//Rectangle
-		public readonly ProtoPool<IsOnGameBoardComponent> IsOnGameBoard = new ();
+		public readonly ProtoPool<InGameBoardComponent> InGameBoard = new ();
 		public readonly ProtoPool<LastComponent> Last = new ();
 		public readonly ProtoPool<RectangleColorComponent> RectangleColor = new ();
 		public readonly ProtoPool<RectangleModuleComponent> RectangleModule = new ();
@@ -64,13 +51,16 @@ namespace Sources.EcsBoundedContexts.Core
 		public readonly ProtoPool<ParentSlotComponent> ParentSlot = new ();
 		public readonly ProtoPool<GameBoardModuleComponent> GameBoardModule = new ();
 		public readonly ProtoPool<GameBoardTag> GameBoard = new ();
+		public readonly ProtoPool<GameTag> Game = new ();
 		public readonly ProtoPool<DestroyEvent> DestroyEvent = new ();
 		public readonly ProtoPool<DropRectanglesEvent> DropRectanglesEvent = new ();
 		public readonly ProtoPool<FillSlotEvent> FillSlotEvent = new ();
+		public readonly ProtoPool<LoadGameEvent> LoadGameEvent = new ();
 		public readonly ProtoPool<MoveToEvent> MoveToEvent = new ();
 		public readonly ProtoPool<OnBeginDragEvent> OnBeginDragEvent = new ();
 		public readonly ProtoPool<OnDropEvent> OnDropEvent = new ();
 		public readonly ProtoPool<OnEndDragEvent> OnEndDragEvent = new ();
+		public readonly ProtoPool<PrintEvent> PrintEvent = new ();
 
 		public GameAspect()
 		{
@@ -78,7 +68,6 @@ namespace Sources.EcsBoundedContexts.Core
 			{
 				[typeof(ProtoPool<EventBufferTag>)] = EventBuffer,
 				[typeof(ProtoPool<ReturnToPoolActionComponent>)] = ReturnToPoolAction,
-				[typeof(ProtoPool<TimerComponent>)] = Timer,
 				[typeof(ProtoPool<ClearableDataComponent>)] = ClearableData,
 				[typeof(ProtoPool<ClearDataEvent>)] = ClearDataEvent,
 				[typeof(ProtoPool<SavableDataComponent>)] = SavableData,
@@ -87,20 +76,10 @@ namespace Sources.EcsBoundedContexts.Core
 				[typeof(ProtoPool<DisableGameObjectEvent>)] = DisableGameObjectEvent,
 				[typeof(ProtoPool<EnableGameObjectEvent>)] = EnableGameObjectEvent,
 				[typeof(ProtoPool<GameObjectComponent>)] = GameObject,
-				[typeof(ProtoPool<AvailableComponent>)] = Available,
-				[typeof(ProtoPool<CompleteComponent>)] = Complete,
-				[typeof(ProtoPool<DecreaseEvent>)] = DecreaseEvent,
-				[typeof(ProtoPool<DistanceComponent>)] = Distance,
 				[typeof(ProtoPool<EntityLinkComponent>)] = EntityLink,
-				[typeof(ProtoPool<IncreaseEvent>)] = IncreaseEvent,
-				[typeof(ProtoPool<InitializedComponent>)] = Initialized,
-				[typeof(ProtoPool<InitializeEvent>)] = InitializeEvent,
 				[typeof(ProtoPool<InPoolComponent>)] = InPool,
-				[typeof(ProtoPool<ScaleComponent>)] = Scale,
-				[typeof(ProtoPool<StringIdComponent>)] = StringId,
 				[typeof(ProtoPool<TransformComponent>)] = Transform,
-				[typeof(ProtoPool<AnimatorComponent>)] = Animator,
-				[typeof(ProtoPool<IsOnGameBoardComponent>)] = IsOnGameBoard,
+				[typeof(ProtoPool<InGameBoardComponent>)] = InGameBoard,
 				[typeof(ProtoPool<LastComponent>)] = Last,
 				[typeof(ProtoPool<RectangleColorComponent>)] = RectangleColor,
 				[typeof(ProtoPool<RectangleModuleComponent>)] = RectangleModule,
@@ -112,13 +91,16 @@ namespace Sources.EcsBoundedContexts.Core
 				[typeof(ProtoPool<ParentSlotComponent>)] = ParentSlot,
 				[typeof(ProtoPool<GameBoardModuleComponent>)] = GameBoardModule,
 				[typeof(ProtoPool<GameBoardTag>)] = GameBoard,
+				[typeof(ProtoPool<GameTag>)] = Game,
 				[typeof(ProtoPool<DestroyEvent>)] = DestroyEvent,
 				[typeof(ProtoPool<DropRectanglesEvent>)] = DropRectanglesEvent,
 				[typeof(ProtoPool<FillSlotEvent>)] = FillSlotEvent,
+				[typeof(ProtoPool<LoadGameEvent>)] = LoadGameEvent,
 				[typeof(ProtoPool<MoveToEvent>)] = MoveToEvent,
 				[typeof(ProtoPool<OnBeginDragEvent>)] = OnBeginDragEvent,
 				[typeof(ProtoPool<OnDropEvent>)] = OnDropEvent,
 				[typeof(ProtoPool<OnEndDragEvent>)] = OnEndDragEvent,
+				[typeof(ProtoPool<PrintEvent>)] = PrintEvent,
 			};
 
 			GameAspectExt.Construct(this);

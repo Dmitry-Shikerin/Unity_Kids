@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Leopotam.EcsProto;
-using Sources.Frameworks.GameServices.EntityPools.Domain.Configs;
 using Sources.Frameworks.GameServices.EntityPools.Interfaces;
 using UnityEngine;
 
@@ -11,8 +10,6 @@ namespace Sources.Frameworks.GameServices.EntityPools.Implementation
     {
         private readonly Transform _root = new GameObject("Root of Pools").transform;
         private readonly Dictionary<Type, IEntityPool> _pools = new();
-
-        private PoolManagerCollector _poolManagerCollector;
 
         public ProtoEntity Get<T>()
             where T : struct =>

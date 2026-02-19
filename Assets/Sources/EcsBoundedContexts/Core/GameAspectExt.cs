@@ -1,25 +1,18 @@
 using System;
 using UnityEngine;
-using System.Collections.Generic;
 using Leopotam.EcsProto;
-using Leopotam.EcsProto.QoL;
 using Sources.Frameworks.MyLeoEcsProto.EventBuffers.Implementation;
 using Sources.Frameworks.GameServices.EntityPools.Domain.Components;
-using System;
-using Sources.EcsBoundedContexts.Timers.Domain;
 using Sources.EcsBoundedContexts.SaveLoads.Domain;
 using Sources.EcsBoundedContexts.GameObjects.Domain;
-using UnityEngine;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
 using Leopotam.EcsProto.Unity.Plugins.LeoEcsProtoCs.Leopotam.EcsProto.Unity.Runtime;
-using Leopotam.EcsProto;
-using Sources.EcsBoundedContexts.Animators;
-using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Domain;
 using Sources.BoundedContexts.Presentation;
 using Sources.BoundedContexts.Components.Slots;
 using Sources.BoundedContexts.Components.Rectangles;
 using Sources.BoundedContexts.Components.GameBoards;
+using Sources.BoundedContexts.Components.Game;
 using Sources.BoundedContexts.Components.Events;
 
 namespace Sources.EcsBoundedContexts.Core
@@ -66,29 +59,6 @@ namespace Sources.EcsBoundedContexts.Core
 
 		public static void DelReturnToPoolAction(this ProtoEntity entity)
 			=> s_GameAspect.ReturnToPoolAction.Del(entity);
-
-		//Timer
-		public static bool HasTimer(this ProtoEntity entity) =>
-			s_GameAspect.Timer.Has(entity);
-
-		public static ref TimerComponent GetTimer(this ProtoEntity entity) =>
-			ref s_GameAspect.Timer.Get(entity);
-
-		public static void ReplaceTimer(this ProtoEntity entity, float value)
-		{
-			ref TimerComponent timerComponent = ref s_GameAspect.Timer.Get(entity);
-			timerComponent.Value = value;
-		}
-
-		public static ref TimerComponent AddTimer(this ProtoEntity entity, float value)
-		{
-			ref TimerComponent timerComponent = ref s_GameAspect.Timer.Add(entity);
-			timerComponent.Value = value;
-			return ref timerComponent;
-		}
-
-		public static void DelTimer(this ProtoEntity entity)
-			=> s_GameAspect.Timer.Del(entity);
 
 		//ClearableData
 		public static bool HasClearableData(this ProtoEntity entity) =>
@@ -204,68 +174,6 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void DelGameObject(this ProtoEntity entity)
 			=> s_GameAspect.GameObject.Del(entity);
 
-		//Available
-		public static bool HasAvailable(this ProtoEntity entity) =>
-			s_GameAspect.Available.Has(entity);
-
-		public static ref AvailableComponent AddAvailable(this ProtoEntity entity)
-		{
-			ref AvailableComponent availableComponent = ref s_GameAspect.Available.Add(entity);
-			return ref availableComponent;
-		}
-
-		public static void DelAvailable(this ProtoEntity entity)
-			=> s_GameAspect.Available.Del(entity);
-
-		//Complete
-		public static bool HasComplete(this ProtoEntity entity) =>
-			s_GameAspect.Complete.Has(entity);
-
-		public static ref CompleteComponent AddComplete(this ProtoEntity entity)
-		{
-			ref CompleteComponent completeComponent = ref s_GameAspect.Complete.Add(entity);
-			return ref completeComponent;
-		}
-
-		public static void DelComplete(this ProtoEntity entity)
-			=> s_GameAspect.Complete.Del(entity);
-
-		//DecreaseEvent
-		public static bool HasDecreaseEvent(this ProtoEntity entity) =>
-			s_GameAspect.DecreaseEvent.Has(entity);
-
-		public static ref DecreaseEvent AddDecreaseEvent(this ProtoEntity entity)
-		{
-			ref DecreaseEvent decreaseEvent = ref s_GameAspect.DecreaseEvent.Add(entity);
-			return ref decreaseEvent;
-		}
-
-		public static void DelDecreaseEvent(this ProtoEntity entity)
-			=> s_GameAspect.DecreaseEvent.Del(entity);
-
-		//Distance
-		public static bool HasDistance(this ProtoEntity entity) =>
-			s_GameAspect.Distance.Has(entity);
-
-		public static ref DistanceComponent GetDistance(this ProtoEntity entity) =>
-			ref s_GameAspect.Distance.Get(entity);
-
-		public static void ReplaceDistance(this ProtoEntity entity, float value)
-		{
-			ref DistanceComponent distanceComponent = ref s_GameAspect.Distance.Get(entity);
-			distanceComponent.Value = value;
-		}
-
-		public static ref DistanceComponent AddDistance(this ProtoEntity entity, float value)
-		{
-			ref DistanceComponent distanceComponent = ref s_GameAspect.Distance.Add(entity);
-			distanceComponent.Value = value;
-			return ref distanceComponent;
-		}
-
-		public static void DelDistance(this ProtoEntity entity)
-			=> s_GameAspect.Distance.Del(entity);
-
 		//EntityLink
 		public static bool HasEntityLink(this ProtoEntity entity) =>
 			s_GameAspect.EntityLink.Has(entity);
@@ -293,45 +201,6 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void DelEntityLink(this ProtoEntity entity)
 			=> s_GameAspect.EntityLink.Del(entity);
 
-		//IncreaseEvent
-		public static bool HasIncreaseEvent(this ProtoEntity entity) =>
-			s_GameAspect.IncreaseEvent.Has(entity);
-
-		public static ref IncreaseEvent AddIncreaseEvent(this ProtoEntity entity)
-		{
-			ref IncreaseEvent increaseEvent = ref s_GameAspect.IncreaseEvent.Add(entity);
-			return ref increaseEvent;
-		}
-
-		public static void DelIncreaseEvent(this ProtoEntity entity)
-			=> s_GameAspect.IncreaseEvent.Del(entity);
-
-		//Initialized
-		public static bool HasInitialized(this ProtoEntity entity) =>
-			s_GameAspect.Initialized.Has(entity);
-
-		public static ref InitializedComponent AddInitialized(this ProtoEntity entity)
-		{
-			ref InitializedComponent initializedComponent = ref s_GameAspect.Initialized.Add(entity);
-			return ref initializedComponent;
-		}
-
-		public static void DelInitialized(this ProtoEntity entity)
-			=> s_GameAspect.Initialized.Del(entity);
-
-		//InitializeEvent
-		public static bool HasInitializeEvent(this ProtoEntity entity) =>
-			s_GameAspect.InitializeEvent.Has(entity);
-
-		public static ref InitializeEvent AddInitializeEvent(this ProtoEntity entity)
-		{
-			ref InitializeEvent initializeEvent = ref s_GameAspect.InitializeEvent.Add(entity);
-			return ref initializeEvent;
-		}
-
-		public static void DelInitializeEvent(this ProtoEntity entity)
-			=> s_GameAspect.InitializeEvent.Del(entity);
-
 		//InPool
 		public static bool HasInPool(this ProtoEntity entity) =>
 			s_GameAspect.InPool.Has(entity);
@@ -344,54 +213,6 @@ namespace Sources.EcsBoundedContexts.Core
 
 		public static void DelInPool(this ProtoEntity entity)
 			=> s_GameAspect.InPool.Del(entity);
-
-		//Scale
-		public static bool HasScale(this ProtoEntity entity) =>
-			s_GameAspect.Scale.Has(entity);
-
-		public static ref ScaleComponent GetScale(this ProtoEntity entity) =>
-			ref s_GameAspect.Scale.Get(entity);
-
-		public static void ReplaceScale(this ProtoEntity entity, Vector3 targetScale, Vector3 currentScale)
-		{
-			ref ScaleComponent scaleComponent = ref s_GameAspect.Scale.Get(entity);
-			scaleComponent.TargetScale = targetScale;
-			scaleComponent.CurrentScale = currentScale;
-		}
-
-		public static ref ScaleComponent AddScale(this ProtoEntity entity, Vector3 targetScale, Vector3 currentScale)
-		{
-			ref ScaleComponent scaleComponent = ref s_GameAspect.Scale.Add(entity);
-			scaleComponent.TargetScale = targetScale;
-			scaleComponent.CurrentScale = currentScale;
-			return ref scaleComponent;
-		}
-
-		public static void DelScale(this ProtoEntity entity)
-			=> s_GameAspect.Scale.Del(entity);
-
-		//StringId
-		public static bool HasStringId(this ProtoEntity entity) =>
-			s_GameAspect.StringId.Has(entity);
-
-		public static ref StringIdComponent GetStringId(this ProtoEntity entity) =>
-			ref s_GameAspect.StringId.Get(entity);
-
-		public static void ReplaceStringId(this ProtoEntity entity, String value)
-		{
-			ref StringIdComponent stringIdComponent = ref s_GameAspect.StringId.Get(entity);
-			stringIdComponent.Value = value;
-		}
-
-		public static ref StringIdComponent AddStringId(this ProtoEntity entity, String value)
-		{
-			ref StringIdComponent stringIdComponent = ref s_GameAspect.StringId.Add(entity);
-			stringIdComponent.Value = value;
-			return ref stringIdComponent;
-		}
-
-		public static void DelStringId(this ProtoEntity entity)
-			=> s_GameAspect.StringId.Del(entity);
 
 		//Transform
 		public static bool HasTransform(this ProtoEntity entity) =>
@@ -416,41 +237,18 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void DelTransform(this ProtoEntity entity)
 			=> s_GameAspect.Transform.Del(entity);
 
-		//Animator
-		public static bool HasAnimator(this ProtoEntity entity) =>
-			s_GameAspect.Animator.Has(entity);
+		//InGameBoard
+		public static bool HasInGameBoard(this ProtoEntity entity) =>
+			s_GameAspect.InGameBoard.Has(entity);
 
-		public static ref AnimatorComponent GetAnimator(this ProtoEntity entity) =>
-			ref s_GameAspect.Animator.Get(entity);
-
-		public static void ReplaceAnimator(this ProtoEntity entity, Animator value)
+		public static ref InGameBoardComponent AddInGameBoard(this ProtoEntity entity)
 		{
-			ref AnimatorComponent animatorComponent = ref s_GameAspect.Animator.Get(entity);
-			animatorComponent.Value = value;
+			ref InGameBoardComponent inGameBoardComponent = ref s_GameAspect.InGameBoard.Add(entity);
+			return ref inGameBoardComponent;
 		}
 
-		public static ref AnimatorComponent AddAnimator(this ProtoEntity entity, Animator value)
-		{
-			ref AnimatorComponent animatorComponent = ref s_GameAspect.Animator.Add(entity);
-			animatorComponent.Value = value;
-			return ref animatorComponent;
-		}
-
-		public static void DelAnimator(this ProtoEntity entity)
-			=> s_GameAspect.Animator.Del(entity);
-
-		//IsOnGameBoard
-		public static bool HasIsOnGameBoard(this ProtoEntity entity) =>
-			s_GameAspect.IsOnGameBoard.Has(entity);
-
-		public static ref IsOnGameBoardComponent AddIsOnGameBoard(this ProtoEntity entity)
-		{
-			ref IsOnGameBoardComponent isOnGameBoardComponent = ref s_GameAspect.IsOnGameBoard.Add(entity);
-			return ref isOnGameBoardComponent;
-		}
-
-		public static void DelIsOnGameBoard(this ProtoEntity entity)
-			=> s_GameAspect.IsOnGameBoard.Del(entity);
+		public static void DelInGameBoard(this ProtoEntity entity)
+			=> s_GameAspect.InGameBoard.Del(entity);
 
 		//Last
 		public static bool HasLast(this ProtoEntity entity) =>
@@ -665,6 +463,19 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void DelGameBoard(this ProtoEntity entity)
 			=> s_GameAspect.GameBoard.Del(entity);
 
+		//Game
+		public static bool HasGame(this ProtoEntity entity) =>
+			s_GameAspect.Game.Has(entity);
+
+		public static ref GameTag AddGame(this ProtoEntity entity)
+		{
+			ref GameTag gameTag = ref s_GameAspect.Game.Add(entity);
+			return ref gameTag;
+		}
+
+		public static void DelGame(this ProtoEntity entity)
+			=> s_GameAspect.Game.Del(entity);
+
 		//DestroyEvent
 		public static bool HasDestroyEvent(this ProtoEntity entity) =>
 			s_GameAspect.DestroyEvent.Has(entity);
@@ -704,6 +515,19 @@ namespace Sources.EcsBoundedContexts.Core
 		public static void DelFillSlotEvent(this ProtoEntity entity)
 			=> s_GameAspect.FillSlotEvent.Del(entity);
 
+		//LoadGameEvent
+		public static bool HasLoadGameEvent(this ProtoEntity entity) =>
+			s_GameAspect.LoadGameEvent.Has(entity);
+
+		public static ref LoadGameEvent AddLoadGameEvent(this ProtoEntity entity)
+		{
+			ref LoadGameEvent loadGameEvent = ref s_GameAspect.LoadGameEvent.Add(entity);
+			return ref loadGameEvent;
+		}
+
+		public static void DelLoadGameEvent(this ProtoEntity entity)
+			=> s_GameAspect.LoadGameEvent.Del(entity);
+
 		//MoveToEvent
 		public static bool HasMoveToEvent(this ProtoEntity entity) =>
 			s_GameAspect.MoveToEvent.Has(entity);
@@ -711,16 +535,18 @@ namespace Sources.EcsBoundedContexts.Core
 		public static ref MoveToEvent GetMoveToEvent(this ProtoEntity entity) =>
 			ref s_GameAspect.MoveToEvent.Get(entity);
 
-		public static void ReplaceMoveToEvent(this ProtoEntity entity, Vector3 value)
+		public static void ReplaceMoveToEvent(this ProtoEntity entity, Vector3 value, Action onComplete)
 		{
 			ref MoveToEvent moveToEvent = ref s_GameAspect.MoveToEvent.Get(entity);
 			moveToEvent.Value = value;
+			moveToEvent.OnComplete = onComplete;
 		}
 
-		public static ref MoveToEvent AddMoveToEvent(this ProtoEntity entity, Vector3 value)
+		public static ref MoveToEvent AddMoveToEvent(this ProtoEntity entity, Vector3 value, Action onComplete)
 		{
 			ref MoveToEvent moveToEvent = ref s_GameAspect.MoveToEvent.Add(entity);
 			moveToEvent.Value = value;
+			moveToEvent.OnComplete = onComplete;
 			return ref moveToEvent;
 		}
 
@@ -795,6 +621,29 @@ namespace Sources.EcsBoundedContexts.Core
 
 		public static void DelOnEndDragEvent(this ProtoEntity entity)
 			=> s_GameAspect.OnEndDragEvent.Del(entity);
+
+		//PrintEvent
+		public static bool HasPrintEvent(this ProtoEntity entity) =>
+			s_GameAspect.PrintEvent.Has(entity);
+
+		public static ref PrintEvent GetPrintEvent(this ProtoEntity entity) =>
+			ref s_GameAspect.PrintEvent.Get(entity);
+
+		public static void ReplacePrintEvent(this ProtoEntity entity, String key)
+		{
+			ref PrintEvent printEvent = ref s_GameAspect.PrintEvent.Get(entity);
+			printEvent.Key = key;
+		}
+
+		public static ref PrintEvent AddPrintEvent(this ProtoEntity entity, String key)
+		{
+			ref PrintEvent printEvent = ref s_GameAspect.PrintEvent.Add(entity);
+			printEvent.Key = key;
+			return ref printEvent;
+		}
+
+		public static void DelPrintEvent(this ProtoEntity entity)
+			=> s_GameAspect.PrintEvent.Del(entity);
 
 	}
 }

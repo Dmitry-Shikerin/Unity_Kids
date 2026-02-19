@@ -1,7 +1,7 @@
 ﻿using Sources.EcsBoundedContexts.Common.Extansions.Colliders;
 using Sources.EcsBoundedContexts.Core;
+using Sources.Frameworks.DeepFramework.DeepLocalization.Runtime.Domain.Enums;
 using Sources.Frameworks.GameServices.DeepWrappers.Localizations;
-using Sources.Frameworks.GameServices.DeepWrappers.Sounds;
 using Sources.Frameworks.GameServices.Prefabs.Domain;
 using Sources.Frameworks.GameServices.Prefabs.Interfaces;
 using Sources.Frameworks.GameServices.Prefabs.Interfaces.Composites;
@@ -14,30 +14,21 @@ namespace Sources.BoundedContexts.Controllers
 {
     public class GameplayScene : IScene
     {
-        private readonly IAssetCollector _assetCollector;
         private readonly IEntityRepository _entityRepository;
-        private readonly DiContainer _container;
         private readonly ICompositeAssetService _compositeAssetService;
-        private readonly ISoundService _soundService;
         private readonly IEcsGameStartUp _ecsGameStartUp;
         private readonly ILocalizationService _localizationService;
         private readonly IUpdateService _updateService;
 
         public GameplayScene(
-            IAssetCollector assetCollector,
             IEntityRepository entityRepository,
-            DiContainer container,
             ICompositeAssetService compositeAssetService,
-            ISoundService soundService,
             IEcsGameStartUp ecsGameStartUp,
             ILocalizationService localizationService,
             IUpdateService updateService)
         {
-            _assetCollector = assetCollector;
             _entityRepository = entityRepository;
-            _container = container;
             _compositeAssetService = compositeAssetService;
-            _soundService = soundService;
             _ecsGameStartUp = ecsGameStartUp;
             _localizationService = localizationService;
             _updateService = updateService;
@@ -47,16 +38,12 @@ namespace Sources.BoundedContexts.Controllers
         {
             await _compositeAssetService.LoadAsync(ResourcesPrefabPath.ResourcesAssetsConfig, AddressablesPrefabPath.AddressablesAssetConfig);
             ColliderExt.Construct(_entityRepository);
-            _localizationService.Translate();
+            _localizationService.Translate(LocalizationLanguage.Russian);
             _ecsGameStartUp.Initialize();
-            //_soundService.Initialize();
-            //_soundService.Play(SoundDatabaseName.Music, SoundName.GameplayBackgroundMusic);
         }
 
         public void Exit()
         {
-            //_soundService.Stop(SoundName.GameplayBackgroundMusic);
-            //_soundService.Destroy();
             _ecsGameStartUp.Destroy();
             _compositeAssetService.Release();
         }

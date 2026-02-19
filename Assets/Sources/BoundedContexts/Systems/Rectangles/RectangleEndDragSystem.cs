@@ -1,16 +1,14 @@
-using DG.Tweening;
 using Leopotam.EcsProto;
 using Leopotam.EcsProto.QoL;
-using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Components.Events;
 using Sources.BoundedContexts.Components.GameBoards;
+using Sources.BoundedContexts.Components.Rectangles;
 using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
 using Sources.EcsBoundedContexts.Core;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Sources.BoundedContexts.Systems.Rectangles
 {
@@ -41,14 +39,14 @@ namespace Sources.BoundedContexts.Systems.Rectangles
             {
                 RectangleModule module = entity.GetRectangleModule().Value;
                 GameObject pointerEnter = entity.GetOnEndDragEvent().Value;
-                RectangleSlotModule slotModule = entity.GetParentSlot().Value.GetRectangleSlotModule().Value;
+                ProtoEntity gameBoardEntity = _gameBoardIt.First().Entity;
 
                 EnableScroll();
 
                 if (IsInGameBoardButNotHole(pointerEnter, module))
                 {
-                    Debug.Log($"IsInGameBoardButNotHole");
-                    entity.DelIsOnGameBoard();
+                    _gameBoardIt.First().Entity.AddPrintEvent("NoGettingIntoHole");
+                    entity.DelInGameBoard();
                     
                     if (entity.HasLast())
                         entity.DelLast();
@@ -62,30 +60,27 @@ namespace Sources.BoundedContexts.Systems.Rectangles
                 if (IsInHole(pointerEnter, module))
                 {
                     HoleView holeView = pointerEnter.GetComponent<HoleView>();
-                    entity.DelIsOnGameBoard();
+                    entity.DelInGameBoard();
                     
                     if (entity.HasLast())
                         entity.DelLast();
                     
-                    module.transform
-                        .DOJump(holeView.transform.position, 300, 1, 0.5f)
-                        .SetEase(Ease.Linear)
-                        .OnComplete(() =>
-                        {
-                            entity.GetReturnToPoolAction().ReturnToPool.Invoke();
-                        });
+                    entity.AddMoveToEvent(holeView.transform.position, () =>
+                        entity.GetReturnToPoolAction().ReturnToPool.Invoke());
+                    gameBoardEntity.AddDropRectanglesEvent();
+                    gameBoardEntity.AddPrintEvent("HittingHole");
                     
-                    _gameBoardIt.First().Entity.AddDropRectanglesEvent();
-
-                    module.CanvasGroup.blocksRaycasts = true;
-                    
-                    return;
+                    continue;
                 }
 
                 if (IsInGameBoard(pointerEnter) == false)
                 {
+                    RectangleSlotModule slotModule = entity.GetParentSlot().Value.GetRectangleSlotModule().Value;
                     module.transform.SetParent(slotModule.transform);
                     module.transform.localPosition = Vector3.zero;
+                    
+                    if (entity.HasPrintEvent() == false)
+                        gameBoardEntity.AddPrintEvent("MissedPlayingField");
                 }
 
                 module.CanvasGroup.blocksRaycasts = true;
@@ -94,13 +89,17 @@ namespace Sources.BoundedContexts.Systems.Rectangles
 
         private bool IsInGameBoardButNotHole(GameObject pointerEnter, RectangleModule module)
         {
+            if (pointerEnter == null)
+            {
+                return false;
+            }
+            
             HoleView holeView = pointerEnter.GetComponent<HoleView>();
             ProtoEntity entity = module.Entity;
 
-            return (holeView == null || IsPointInside(Input.mousePosition) == false) && entity.HasIsOnGameBoard();
+            return (holeView == null || IsPointInside(Input.mousePosition) == false) && entity.HasInGameBoard();
         }
-
-
+        
         private bool IsInHole(GameObject eventData, RectangleModule module)
         {
             HoleView holeView = eventData.GetComponent<HoleView>();
@@ -112,7 +111,7 @@ namespace Sources.BoundedContexts.Systems.Rectangles
             if (IsPointInside(Input.mousePosition) == false)
                 return false;
 
-            if (entity.HasIsOnGameBoard() == false)
+            if (entity.HasInGameBoard() == false)
                 return false;
 
             return true;

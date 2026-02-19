@@ -1,8 +1,8 @@
 using DG.Tweening;
 using Leopotam.EcsProto;
 using Leopotam.EcsProto.QoL;
-using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Components.Events;
+using Sources.BoundedContexts.Components.Rectangles;
 using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core;
 using Sources.EcsBoundedContexts.Core.Domain;

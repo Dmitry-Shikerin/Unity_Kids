@@ -1,7 +1,8 @@
 using Leopotam.EcsProto;
 using Leopotam.EcsProto.QoL;
-using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Components.Events;
+using Sources.BoundedContexts.Components.Rectangles;
+using Sources.BoundedContexts.Domain;
 using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Common.Domain.Components;
 using Sources.EcsBoundedContexts.Core;
@@ -15,17 +16,19 @@ namespace Sources.BoundedContexts.Systems.Rectangles
     [Aspect(AspectName.Game)]
     public class RectangleBeginDragSystem : IProtoRunSystem
     {
-        private readonly HudView _hudView;
-
         [DI] private readonly ProtoItExc _it = new(
             It.Inc<
                 RectangleTag,
                 OnBeginDragEvent>(),
             It.Exc<InPoolComponent>());
-        
+
+        private readonly HudView _hudView;
+        private readonly UiView _parentView;
+
         public RectangleBeginDragSystem(HudView hudView)
         {
             _hudView = hudView;
+            _parentView = _hudView.GetView(UiViewId.Gameplay);
         }
 
         public void Run()
@@ -35,7 +38,7 @@ namespace Sources.BoundedContexts.Systems.Rectangles
                 RectangleModule module = entity.GetRectangleModule().Value;
 
                 DisableScroll();
-                module.RectTransform.SetParent(_hudView.transform);
+                module.RectTransform.SetParent(_parentView.transform);
                 module.RectTransform.SetAsLastSibling();
                 module.CanvasGroup.blocksRaycasts = false;
             }

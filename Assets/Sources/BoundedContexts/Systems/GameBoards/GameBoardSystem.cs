@@ -1,18 +1,19 @@
 using System;
 using Leopotam.EcsProto;
 using Leopotam.EcsProto.QoL;
-using Sources.BoundedContexts.Components;
 using Sources.BoundedContexts.Components.Events;
 using Sources.BoundedContexts.Components.GameBoards;
+using Sources.BoundedContexts.Components.Rectangles;
 using Sources.BoundedContexts.Presentation;
 using Sources.EcsBoundedContexts.Core;
 using Sources.EcsBoundedContexts.Core.Domain;
 using Sources.EcsBoundedContexts.Core.Domain.Systems;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Sources.BoundedContexts.Systems.GameBoards
 {
-    [EcsSystem(24)]
+    [EcsSystem(19)]
     [ComponentGroup(ComponentGroup.Common)]
     [Aspect(AspectName.Game)]
     public class GameBoardSystem : IProtoRunSystem
@@ -43,8 +44,8 @@ namespace Sources.BoundedContexts.Systems.GameBoards
                 throw new ArgumentNullException(nameof(module));
             
             ProtoEntity rectangleEntity = module.Entity;
-            
-            if (rectangleEntity.HasIsOnGameBoard())
+
+            if (rectangleEntity.HasInGameBoard())
                 return;
             
             module.transform.SetParent(gameBoardModule.transform);
@@ -52,37 +53,47 @@ namespace Sources.BoundedContexts.Systems.GameBoards
             if (_lastIt.Len() > 1)
                 throw new IndexOutOfRangeException("LastIt.Len() > 1");
             
-            if (CanPost(module))
+            if (CanPost(module, gameBoardModule))
             {
-                Vector3 targetPosition = GetTargetPosition(gameBoardModule, module);
-                rectangleEntity.AddMoveToEvent(targetPosition);
                 rectangleEntity.GetParentSlot().Value.AddFillSlotEvent();
-                
+                entity.AddPrintEvent("PlaceCube");
+                Vector3 targetPosition = GetTargetPosition(gameBoardModule, module);
+
                 if (_lastIt.Len() > 0)
                 {
                     ProtoEntity lastRectangleEntity = _lastIt.First().Entity;
                     lastRectangleEntity.DelLast();
                 }
                 
+                rectangleEntity.AddMoveToEvent(targetPosition, () =>
+                {
+                    rectangleEntity.AddLast();
+                    rectangleEntity.AddInGameBoard();
+                });
+
                 return;
             }
 
+            entity.AddPrintEvent("MissedTower");
             rectangleEntity.AddDestroyEvent();
             rectangleEntity.GetParentSlot().Value.AddFillSlotEvent();
         }
 
         private Vector3 GetTargetPosition(GameBoardModule gameBoardModule, RectangleModule module)
         {
-            float xPos = module.transform.position.x;
+            if (_lastIt.Len() == 0)
+                return new Vector3(module.transform.position.x, gameBoardModule.BotTransform.position.y);
+
+            RectangleModule lastModule = _lastIt.First().Entity.GetRectangleModule().Value;
+            float topLastRectanglePosY = lastModule.TopTransform.position.y;
+            float leftPos = lastModule.LeftTransform.position.x;
+            float rightPos = lastModule.RightTransform.position.x;
+            float xPos = Random.Range(leftPos, rightPos);
             
-            Debug.Log($"Can laST {_lastIt.Len() > 0}");
-            
-            return _lastIt.Len() == 0
-                ? new Vector3(xPos, gameBoardModule.BotTransform.position.y)
-                : new Vector3(xPos, _lastIt.First().Entity.GetRectangleModule().Value.TopTransform.position.y);
+            return new Vector3(xPos, topLastRectanglePosY);
         }
 
-        private bool CanPost(RectangleModule module)
+        private bool CanPost(RectangleModule module, GameBoardModule gameBoardModule)
         {
             if (_lastIt.Len() == 0)
                 return true;
@@ -93,6 +104,15 @@ namespace Sources.BoundedContexts.Systems.GameBoards
             float rightPos = lastRectangleModule.RightTransform.position.x;
             
             if (module.transform.position.x < leftPos || module.transform.position.x > rightPos)
+                return false;
+
+            if (module.transform.position.y < lastRectangleModule.TopTransform.position.y)
+                return false;
+            
+            if (module.transform.position.y < gameBoardModule.BotTransform.position.y)
+                return false;
+
+            if (module.LeftTransform.position.x < gameBoardModule.LeftTransform.position.x)
                 return false;
 
             return true;

@@ -14,8 +14,6 @@ namespace Sources.App.DIContainers.Common
         {
             Container.Bind<IStorageService>().To<StorageService>().AsSingle();
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
-            
-            //Assets
             Container.Bind<IAssetCollector>().To<AssetCollector>().AsSingle();
             Container.Bind<IResourcesAssetLoader>().To<ResourcesAssetLoader>().AsSingle();
             Container.Bind<IAddressablesAssetLoader>().To<AddressablesAssetLoader>().AsSingle();
